@@ -1,0 +1,53 @@
+<div class="filterTitle" (click)="toggleFilterSection($event)" >
+    <span>Tender Title</span> 
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <input type="text" class="input-control" />
+</div>               
+
+<div class="filterTitle" (click)="toggleFilterSection($event)" >
+    <span>Tender #</span> 
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <input type="text" class="input-control" />
+</div>               
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Location</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <input type="text" class="input-control" />
+</div>                      
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Project Nature</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>   
+<div class="filterSection">
+    <label><input type="checkbox" /> National</label><br/>                           
+    <label><input type="checkbox" /> International</label>  
+</div>
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Published Date</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <label><input type="radio" name="publishedDate" checked={{true}} /> None</label><br/>
+    <label><input type="radio" name="publishedDate" /> Past 7 days</label><br/>               
+    <label><input type="radio" name="publishedDate" /> Past 30 days</label>
+</div> 
+
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Closing Date</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection border-bottom">
+    <label><input type="radio" name="closingDate" checked={{true}}  /> None</label><br/>
+    <label><input type="radio" name="closingDate" /> Past 7 days</label><br/>                          
+    <label><input type="radio" name="closingDate" /> Past 30 days</label>
+</div> 

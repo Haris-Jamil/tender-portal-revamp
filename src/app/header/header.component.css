@@ -1,0 +1,59 @@
+.headerContainer {
+    height: 50px;
+    width: 100%;
+    background-color: #353b48; 
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.logoContainer {
+    flex: 5;
+}
+
+.logo {
+    color: #f5f6fa;
+    margin-left: 20px;
+}
+
+/* .searchbarContainer {
+    flex: 5;
+} */
+
+.searchbar {
+    width: 100%;
+    border-radius: 7px;
+    border: none;
+    height: 30px;
+    font-size: 15px;
+    padding-left: 5px;
+}
+
+.searchbar:focus {
+    outline: none;
+}
+
+.userDetailContainer {
+    display: flex;
+    flex: 7;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.userNameContainer {
+    margin-right: 20px;
+}
+.userName {
+    color:#f5f6fa;
+    font-weight: bold;
+}
+
+.userIconContainer {
+    margin-right: 40px;
+}
+
+.userIcon {
+    color: #f5f6fa;
+}

@@ -1,0 +1,17 @@
+<div class="vendorListContainer" >
+    <div class="leftContainer" >
+        <span class="tenderNumber" >{{tender.tenderNo}}</span>
+        <p class="details" >{{tender.title}}</p>
+        <span class="location" >Location: {{tender.location}}</span>
+    </div>
+    <div class="rightContainer" >
+        <p>Status: <span class="status open" >Open</span></p>
+        <p class="publishedDate" >Published Data: {{tender.publishedDate}}</p>
+        <p class="closingDate" >Closing Data: {{tender.closingDate}}</p>
+        <div class="btncontainer" >            
+            <button class="detailsBtn" >Details</button>
+            <button class="editBtn" (click)="emitEditEvent()" >Edit</button>
+        </div>
+        
+    </div>
+</div>

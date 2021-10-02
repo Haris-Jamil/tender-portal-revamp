@@ -1,0 +1,50 @@
+    .form-input{
+    margin-right:5px;
+    width: 100px;
+}
+
+.form-input-sm{
+    margin-right:5px;
+    width: 80px;
+}
+
+.form-input-lg{
+    margin-right:5px;
+    width: 100%;
+}
+
+.form-row{
+    margin-bottom: 5px;
+}
+
+.msg {
+    font-size: 12px;
+    background-color:#74b9ff;
+    color: white;
+    padding: 3px;
+    text-align: center;
+}
+
+.chk-bx {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+label {
+    display: block;
+}
+
+.tenderFee {
+    cursor: pointer;
+    caret-color: transparent;
+}
+
+.tenderFeeBox {
+    background-color: white;
+    border:1px solid #dfe6e9;
+    width: 100%;
+}
+
+.saveBtn {
+    width: 100%;
+}

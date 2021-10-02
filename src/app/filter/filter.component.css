@@ -1,0 +1,46 @@
+.filterHeading {
+    padding-bottom: 0px;
+} 
+
+.input-control {
+    width: 95%;
+    border-radius: 5px;
+    height: 30px;
+    border: 1px solid #dcdde1;
+}
+
+.input-control:focus {
+    outline: none;
+}
+
+.filterTitle {
+    background-color: #f5f6fa;
+    padding: 8px 15px 8px 15px;
+    border-top: 1px solid #dcdde1;
+    border-left: 1px solid #dcdde1;
+    border-right: 1px solid #dcdde1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.filterSection {
+    padding: 8px 0px 8px 15px;
+    border-top: 1px solid #dcdde1;
+    border-left: 1px solid #dcdde1;
+    border-right: 1px solid #dcdde1;   
+    display: none; 
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dcdde1;
+}
+
+/* .form-block {
+    padding: 5px 3px 5px 3px;
+    background-color: #f5f6fa;
+    border-top: 1px solid #dcdde1;
+    border-left: 1px solid #dcdde1;
+    border-right: 1px solid #dcdde1;
+} */

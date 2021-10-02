@@ -1,0 +1,64 @@
+<p class="msg" >Please Add all date type field in dd-MM-YYYY format</p>
+
+<div class="form-inline form-row">
+    <select name="selectedCompany" (change)="companyChange($event)" [(ngModel)]="tender.code" class="form-control form-control-sm form-input-lg">
+        <option *ngFor="let c of companies" value="{{c}}" >{{c}}</option>   
+    </select>
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.uploadedDate" name="uploadedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Uploaded Date" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.tenderNo" name="tenderNo" type="text" class="form-control form-control-sm form-input-lg" placeholder="Tender #" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.title" name="title" type="text" class="form-control form-control-sm form-input-lg" placeholder="title" >
+</div>
+
+<input class="form-control form-control-sm form-input-lg tenderFee" (click)="toggleDisplay('.tenderFeeBox')" placeholder="Tender fee options"/>
+<div class="form-row tenderFeeBox" style="display: none;">
+    <label><input type="checkbox" [checked]="checks[0]" class="chk-bx" (change)="checkBoxChange($event)" value="Free" />Free</label>
+    <label><input type="checkbox" [checked]="checks[1]" class="chk-bx" (change)="checkBoxChange($event)" value="By Cash" />By Cash</label>
+    <label><input type="checkbox" [checked]="checks[2]" class="chk-bx" (change)="checkBoxChange($event)" value="By PO"/>By PO</label>
+    <label><input type="checkbox" [checked]="checks[3]" class="chk-bx" (change)="checkBoxChange($event)" value="By Hand" />By Hand</label>
+    <label><input type="checkbox" [checked]="checks[4]" class="chk-bx" (change)="checkBoxChange($event)" value="By Email" />By Email</label>
+    <label><input type="checkbox" [checked]="checks[5]" class="chk-bx" (change)="checkBoxChange($event)" value="By Post" />By Post</label>
+    <label><input type="checkbox" [checked]="checks[6]" class="chk-bx" (change)="checkBoxChange($event)" value="Availability" />Availability</label>    
+</div>
+
+<div class="form-inline form-row" style="margin-top:5px">
+    <input autocomplete="off" [(ngModel)]="tender.amount" name="amount" type="text" class="form-control form-control-sm form-input-lg" placeholder="Amount" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.publishedDate" name="publishedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Published Date" >
+</div>
+
+<ng-container *ngIf="code == 'PAKRAIL' || code == 'PARCO' ">
+    <div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.docDeadline" name="docDeadline" type="text" class="form-control form-control-sm form-input-lg" placeholder="Document Deadline" >
+    </div>
+</ng-container>          
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.closingDate" name="closingDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Closing Date" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.location" name="location" type="text" class="form-control form-control-sm form-input-lg" placeholder="{{ code == 'PPRA-PUN' ? 'Department' : 'Location' }}" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.bidSecurity" name="bidSecurity" type="text" class="form-control form-control-sm form-input-lg" placeholder="Bid Secuirty" >
+</div>
+
+<div class="form-inline form-row">
+    <input autocomplete="off" [(ngModel)]="tender.nature" name="nature" type="text" class="form-control form-control-sm form-input-lg" placeholder="Nature" >
+</div>
+
+<div class="form-inline form-row">
+    <button class="btn btn-success btn-sm saveBtn" >Save Tender</button>
+</div>

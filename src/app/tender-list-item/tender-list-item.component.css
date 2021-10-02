@@ -1,0 +1,66 @@
+.vendorListContainer {
+    display: flex;
+    padding: 20px 20px;
+    background-color: #f5f6fa;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+.leftContainer {
+    flex: 8;   
+    padding-right: 10px; 
+}
+
+.tenderNumber {
+    font-weight: bold;
+}
+
+.location {
+    color: #718093;
+}
+
+.rightContainer {
+    flex: 2;    
+    border-left: 2px solid #dcdde1;
+    padding-left: 10px;    
+}
+
+.detailsBtn {
+    background-color: #00a8ff;
+    width: 80px;
+    border: none;
+    padding: 1px 1px;
+    color: white;
+    margin-right: 5px;
+}
+
+.editBtn {
+    background-color: #fdcb6e;
+    width: 80px;
+    border: none;
+    padding: 1px 1px;
+    color: #2d3436;
+    margin-right: 5px;
+}
+
+.status {
+    border-radius: 2px;
+    border: 1px solid #dcdde1;
+    font-size: 11px;
+    padding: 3px 5px;
+    color: white;
+}
+
+.open {
+    background-color: #4cd137;    
+}
+
+.closed {
+    background-color: #e84118;
+}
+
+.btncontainer {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+}
