@@ -1,0 +1,60 @@
+import { Component, OnInit } from '@angular/core';
+import { Tender } from '../models/Tender';
+import { TenderService } from '../tender.service';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
+})
+export class HomeComponent implements OnInit {
+
+  title = 'tender-portal-revamp';
+  tenders: any[] = [];
+  page = 1;
+  selectedTender: Tender = null;
+
+  constructor(private tenderService: TenderService) {
+    
+  }
+
+  ngOnInit(): void {
+    this.loadVendors(this.page);
+  }
+
+  async loadVendors(page): Promise<void> {
+      this.tenders = await this.tenderService.getTenders(page);
+  }
+
+  openTab(): void {
+    this.selectedTender = null
+    document.getElementById('edit-tab').classList.add('disabled');
+  }
+
+  selectForEdit(tender): void {
+    if (tender) {
+      const editTab = document.getElementById('edit-tab');      
+      editTab.classList.remove('disabled');
+      editTab.click();
+      this.selectedTender = tender;      
+    }  
+  }
+
+  async deleteTender(id): Promise<void> {
+    console.log('id', id)
+    const response = await this.tenderService.deleteTenderById(id);
+    if (response === 1) {
+      this.loadVendors(this.page);
+    }
+  }
+
+  gotoPage(page): void {
+    this.page = page;
+    this.loadVendors(this.page);
+  }
+
+  reload(): void {
+   this.loadVendors(this.page);
+  }
+  
+}

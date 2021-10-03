@@ -1,0 +1,36 @@
+<div class="myContainer" >
+    <div class="sideContainer" >
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="filter-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#filters" type="button" role="tab" aria-controls="filters" aria-selected="true">Filters</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="add-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#addTender" type="button" role="tab" aria-controls="addTender" aria-selected="false">Add Tender</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link disabled" id="edit-tab" data-bs-toggle="tab" data-bs-target="#editTender" type="button" role="tab" aria-controls="editTender" aria-selected="false">Edit Tender</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="filters" role="tabpanel" aria-labelledby="filter-tab">
+                <app-filter></app-filter>
+            </div>
+            <div class="tab-pane fade" id="addTender" role="tabpanel" aria-labelledby="add-tab">
+                <app-add-tender [editTender]="null" (saved)="reload()" ></app-add-tender>
+            </div>
+            <div class="tab-pane fade" id="editTender" role="tabpanel" aria-labelledby="edit-tab">
+                <app-add-tender [editTender]="selectedTender" (saved)="reload()" ></app-add-tender>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="placeholderContainer" ></div>
+
+    <div class="listingContainer" >
+        <div><b>page # {{page}}</b></div>  
+        <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>
+        <app-pagination *ngIf="tenders.length" (emitPage)="gotoPage($event)" ></app-pagination>
+    </div>
+    
+</div>

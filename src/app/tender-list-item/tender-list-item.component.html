@@ -5,12 +5,13 @@
         <span class="location" >Location: {{tender.location}}</span>
     </div>
     <div class="rightContainer" >
-        <p>Status: <span class="status open" >Open</span></p>
+        <p>Status: <span class="status {{status}}" >{{status}}</span></p>
         <p class="publishedDate" >Published Data: {{tender.publishedDate}}</p>
         <p class="closingDate" >Closing Data: {{tender.closingDate}}</p>
         <div class="btncontainer" >            
-            <button class="detailsBtn" >Details</button>
+            <button class="detailsBtn" (click)="gotoDetail()">Details</button>
             <button class="editBtn" (click)="emitEditEvent()" >Edit</button>
+            <button class="deleteBtn" (click)="emitdeleteEvent()" >Delete</button>
         </div>
         
     </div>

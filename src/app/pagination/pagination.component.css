@@ -1,0 +1,21 @@
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.paginationItem {
+    background-color: #f5f6fa;
+    border: 1px solid #dcdde1;
+    border-right: none;
+    padding: 3px 7px;
+    cursor: pointer;
+}
+
+.lastItem {
+    border-right: 1px solid #dcdde1;
+}
+
+.selected {
+    background-color: #dff9fb;
+}

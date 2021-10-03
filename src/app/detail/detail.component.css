@@ -1,0 +1,48 @@
+h1 {
+    color: #1e90ff;
+}
+.detailContainer {
+    padding: 20px 20px;
+    display: flex;
+}
+
+.rightContainer {
+    flex: 4;
+    padding-left: 20px;
+}
+
+.leftContainer {
+    flex: 1.5;
+    border-right: 2px solid #dfe4ea;
+    padding-right: 20px;    
+}
+
+.tenderCode {
+    text-align: center;
+    color: #1e90ff;
+}
+
+.grayout {
+    color: #485460;
+}
+
+
+.fileName {
+    padding-left: 10px;
+}
+
+.status {
+    border-radius: 2px;
+    border: 1px solid #dcdde1;
+    font-size: 11px;
+    padding: 3px 5px;
+    color: white;
+}
+
+.open {
+    background-color: #4cd137;    
+}
+
+.closed {
+    background-color: #e84118;
+}

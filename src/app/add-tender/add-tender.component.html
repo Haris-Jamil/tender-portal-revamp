@@ -1,5 +1,4 @@
 <p class="msg" >Please Add all date type field in dd-MM-YYYY format</p>
-
 <div class="form-inline form-row">
     <select name="selectedCompany" (change)="companyChange($event)" [(ngModel)]="tender.code" class="form-control form-control-sm form-input-lg">
         <option *ngFor="let c of companies" value="{{c}}" >{{c}}</option>   
@@ -59,6 +58,17 @@
     <input autocomplete="off" [(ngModel)]="tender.nature" name="nature" type="text" class="form-control form-control-sm form-input-lg" placeholder="Nature" >
 </div>
 
+<label>File 1: <input name="file1" type="file" (change)="handleFileInput($event.target.files, 1)" class="form-control-file border">{{file1 ? truncateString(file1.name) : ''}}</label>
+
+
+<label>File 2: <input name="file2" type="file" (change)="handleFileInput($event.target.files, 2)" class="form-control-file border">{{file2 ? truncateString(file2.name) : ''}}</label>
+
+
 <div class="form-inline form-row">
-    <button class="btn btn-success btn-sm saveBtn" >Save Tender</button>
+    <button class="btn btn-sm saveBtn {{btnState}}" (click)="save()" >{{btnText}}
+        <div *ngIf="loading" class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+    </button>
 </div>
+

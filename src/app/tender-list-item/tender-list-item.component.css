@@ -26,21 +26,44 @@
 }
 
 .detailsBtn {
-    background-color: #00a8ff;
+    background-color: #019ce9;
     width: 80px;
     border: none;
+    border-radius: 2px;
     padding: 1px 1px;
     color: white;
     margin-right: 5px;
+}
+.detailsBtn:hover {
+    background-color: #01699c;
 }
 
 .editBtn {
     background-color: #fdcb6e;
     width: 80px;
     border: none;
+    border-radius: 2px;
     padding: 1px 1px;
-    color: #2d3436;
+    color: white;
     margin-right: 5px;
+}
+
+.editBtn:hover {
+    background-color: #e6ab40;
+}
+
+.deleteBtn {
+    background-color: #EE5A24;
+    width: 80px;
+    border: none;
+    border-radius: 2px;
+    padding: 1px 1px;
+    color: white;
+    margin-right: 5px; 
+}
+
+.deleteBtn:hover {
+    background-color: #EA2027;
 }
 
 .status {

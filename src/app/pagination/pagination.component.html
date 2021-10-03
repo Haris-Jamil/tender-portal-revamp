@@ -1,0 +1,13 @@
+<div class="paginationContainer" >
+    <div class="paginationItem" (click)="previousBatch()" >
+        <fa-icon [icon]="faCaretLeft"></fa-icon>
+    </div>
+    <div class="paginationItem selected" (click)="selectPage($event, page)" >{{page}}</div>
+    <div class="paginationItem" (click)="selectPage($event, page+1)" >{{page+1}}</div>
+    <div class="paginationItem" (click)="selectPage($event, page+2)" >{{page+2}}</div>
+    <div class="paginationItem" (click)="selectPage($event, page+3)" >{{page+3}}</div>
+    <div class="paginationItem" (click)="selectPage($event, page+4)" >{{page+4}}</div>
+    <div class="paginationItem lastItem" (click)="nextBatch()" >
+        <fa-icon [icon]="faCaretRight"></fa-icon>
+    </div> 
+</div>

@@ -1,0 +1,52 @@
+<div class="detailContainer" *ngIf="tender" >
+   
+    
+    <div class="leftContainer" >
+        <h2 class="tenderCode" ><b>{{tender.code}}</b></h2>
+        <hr>
+        <table class="table table-borderless" >
+            <tr>
+                <td><b>Published On</b></td>
+                <td>{{tender.publishedDate ? tender.publishedDate : 'NA'}}</td>
+            </tr>
+            <tr>
+                <td><b>Closed On</b></td>
+                <td>{{tender.closingDate ? tender.closingDate : 'NA'}}</td>
+            </tr>
+            <tr>
+                <td><b>Document Deadline</b></td>
+                <td>{{tender.documentDeadline && tender.documentDeadline !== 'null' && tender.documentDeadline !== 'undefined' ? tender.documentDeadline : 'NA'}}</td>
+            </tr>
+        </table>          
+        <h5 class="fileHeading" >Files:</h5>
+
+        <fa-icon [icon]="faFile"></fa-icon>
+        <a *ngIf="tender.file1" href={{makeFileLink(tender.file1)}} target="_blank" class="fileName" >{{ extractFileName(tender.file1) }}</a>
+        <span *ngIf="!tender.file1"> NA</span>
+        <br>
+
+        <fa-icon [icon]="faFile"></fa-icon>
+        <a *ngIf="tender.file2" href="{{makeFileLink(tender.file2)}}" target="_blank" class="fileName">{{ extractFileName(tender.file2) }}</a>
+        <span *ngIf="!tender.file2"> NA</span>
+    </div>
+
+    <div class="rightContainer" >
+        <h5 class="grayout" >Tender # {{tender.tenderNo ? tender.tenderNo : 'NA'}}</h5>
+        <h1>{{tender.title ? tender.title : 'NA'}}</h1>        
+        <hr>
+        <span>Status: <span class="status {{status}}" >{{status}}</span></span><br>
+        <span><b>Amount:</b> {{tender.amount ? tender.amount : 'NA'}}</span><br>
+        <span><b>Bid Security:</b> {{tender.bidSecurity ? tender.bidSecurity : 'NA'}}</span><br>
+        <span><b>Method:</b> {{tender.method ? tender.method : 'NA'}}</span><br>
+        <span><b>Location:</b> {{tender.location ? tender.location : 'NA'}}</span><br>
+        <span><b>Nature:</b> {{tender.nature ? tender.nature : 'NA'}}</span><br>
+        <span><b>Link 1: </b>
+            <a *ngIf="tender.tenderLink" href="{{tender.tenderLink}}" target="_blank" >{{tender.tenderLink}}</a>
+            <span *ngIf="!tender.tenderLink">NA</span>
+        </span><br>
+        <span><b>Link 2: </b>
+            <a *ngIf="tender.tenderLink2" href="{{tender.tenderLink2}}" target="_blank" >{{tender.tenderLink2}}</a>
+            <span *ngIf="!tender.tenderLink2">NA</span>
+        </span><br>
+    </div> 
+</div>
