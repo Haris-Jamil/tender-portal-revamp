@@ -1,0 +1,14 @@
+<div class="loginContainer" >
+            
+    <div class="formContainer" >
+
+        <div class="loginHeader" >
+            <h4>Login</h4>
+        </div>
+        <input class="form-control" [(ngModel)]="username"  type="text" placeholder="username" />
+        <input class="form-control" [(ngModel)]="password" type="password" placeholder="password" />
+        <span class="errorMsg" *ngIf="errorMsg" >{{errorMsg}}</span>
+        <button class="btn btn-primary btn-sm loginBtn" (click)="login()" >login</button>
+    </div>
+
+</div>

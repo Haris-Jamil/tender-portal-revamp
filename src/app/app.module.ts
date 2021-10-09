@@ -13,10 +13,13 @@ import { AddTenderComponent } from './add-tender/add-tender.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { HomeComponent } from './home/home.component';
 import { DetailComponent } from './detail/detail.component';
-
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'detail/:id', component: DetailComponent },
 ];
@@ -31,7 +34,9 @@ const appRoutes: Routes = [
     AddTenderComponent,
     PaginationComponent,
     HomeComponent,
-    DetailComponent
+    DetailComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

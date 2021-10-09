@@ -57,3 +57,7 @@
 .userIcon {
     color: #f5f6fa;
 }
+
+button {
+    margin-right: 10px;
+}

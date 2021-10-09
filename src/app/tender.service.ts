@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,14 @@ import { Observable } from 'rxjs';
 export class TenderService {
 
   baseUrl = 'http://tii-usa.com/tender-tracker-new/api/';
+  @Output() authEvent: BehaviorSubject<any> = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) { }
+
+  setUser(userData): void {
+    this.authEvent.next(userData);    
+    localStorage.setItem('user', JSON.stringify({username: userData.username, type: userData.type}));
+  }
 
   getTenders(page: number, filter): Promise<any> {
     let queryStr = '';
@@ -33,6 +39,19 @@ export class TenderService {
 
   deleteTenderById(id): Promise<any> {
     return this.http.get(`${this.baseUrl}deleteTender.php?id=${id}`).toPromise();
+  }
+
+  login(username, password): Promise<any> {
+    return this.http.get(`${this.baseUrl}login2.php?username=${username}&password=${password}`).toPromise();
+  }
+
+  register(username, password): Promise<any> {
+    return this.http.get(`${this.baseUrl}register.php?username=${username}&password=${password}`).toPromise();
+  }
+
+  logout(): void {
+    this.authEvent.next(null);
+    localStorage.removeItem('user');
   }
 
 }

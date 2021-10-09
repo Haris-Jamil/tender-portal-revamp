@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { TenderService } from '../tender.service';
 
 @Component({
   selector: 'app-tender-list-item',
@@ -12,8 +13,10 @@ export class TenderListItemComponent implements OnInit {
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<string> = new EventEmitter();
   status: string;
+  blurMode: boolean = false
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tenderService: TenderService) { }
+
 
   ngOnInit(): void {
     if (this.tender.closingDate) {
@@ -31,6 +34,12 @@ export class TenderListItemComponent implements OnInit {
         this.status = "open"
       }
     }    
+
+    this.tenderService.authEvent.subscribe( (user) => {
+      if (user) {
+        this.blurMode = user.type == 2 ? true : false;
+      }
+    });
   }
 
   emitEditEvent(): void {

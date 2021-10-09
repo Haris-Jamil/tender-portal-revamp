@@ -1,0 +1,35 @@
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;    
+}
+
+.loginHeader {
+    text-align: center;
+}
+
+.formContainer {
+    border: 1px solid #bdc3c7;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+input {
+    width: 300px;
+}
+
+input, .loginBtn {
+    display: block;
+    margin-top: 10px;
+}
+
+.loginBtn {
+    width: 100%;
+}
+
+.errorMsg {
+    color: #d63031;
+    font-size: 13px;
+}

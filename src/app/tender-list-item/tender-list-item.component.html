@@ -1,10 +1,12 @@
 <div class="vendorListContainer" >
     <div class="leftContainer" >
-        <span class="tenderNumber" >{{tender.tenderNo}}</span>
+        <span class="tenderNumber" *ngIf="!blurMode" >{{tender.tenderNo}}</span>
+        <span class="tenderNumber blur" *ngIf="blurMode" >Dummy tender #</span>
         <p class="details" >{{tender.title}}</p>
         <span class="location" >Location: {{tender.location}}</span>
     </div>
-    <div class="rightContainer" >
+
+    <div class="rightContainer" *ngIf="!blurMode" >
         <p>Status: <span class="status {{status}}" >{{status}}</span></p>
         <p class="publishedDate" >Published Data: {{tender.publishedDate}}</p>
         <p class="closingDate" >Closing Data: {{tender.closingDate}}</p>
@@ -13,6 +15,17 @@
             <button class="editBtn" (click)="emitEditEvent()" >Edit</button>
             <button class="deleteBtn" (click)="emitdeleteEvent()" >Delete</button>
         </div>
-        
     </div>
+
+    <div class="rightContainer blur" *ngIf="blurMode" >
+        <p>Status: <span class="status {{status}}" >{{status}}</span></p>
+        <p class="publishedDate" >Published Data: 1-1-1990</p>
+        <p class="closingDate" >Closing Data: 1-1-1990</p>
+        <div class="btncontainer" >            
+            <button class="detailsBtn" (click)="gotoDetail()">Details</button>
+            <button class="editBtn" (click)="emitEditEvent()" >Edit</button>
+            <button class="deleteBtn" (click)="emitdeleteEvent()" >Delete</button>
+        </div>
+    </div>
+
 </div>

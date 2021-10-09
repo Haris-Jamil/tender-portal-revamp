@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tender } from '../models/Tender';
 import { TenderService } from '../tender.service';
 
@@ -15,12 +16,17 @@ export class HomeComponent implements OnInit {
   selectedTender: Tender = null;
   filter = {};
 
-  constructor(private tenderService: TenderService) {
+  constructor(private tenderService: TenderService, private router: Router) {
     
   }
 
   ngOnInit(): void {
-    this.loadVendors(this.page);
+    const user = localStorage.getItem('user');
+    if (!user) {
+      this.router.navigate(['/login']);
+    } else {
+      this.loadVendors(this.page);    
+    }
   }
 
   async loadVendors(page): Promise<void> {
