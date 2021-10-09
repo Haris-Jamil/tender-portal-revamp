@@ -7,7 +7,7 @@ function requireHTTPS(req, res, next) {
 }
 const express = require('express');
 const app = express();
-// app.use(requireHTTPS);
+// qapp.use(requireHTTPS);
 
 app.use(express.static('./dist/tender-portal-revamp'));
 

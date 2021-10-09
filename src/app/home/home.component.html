@@ -13,7 +13,7 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="filters" role="tabpanel" aria-labelledby="filter-tab">
-                <app-filter></app-filter>
+                <app-filter (emitFilter)="applyFilter($event)" ></app-filter>
             </div>
             <div class="tab-pane fade" id="addTender" role="tabpanel" aria-labelledby="add-tab">
                 <app-add-tender [editTender]="null" (saved)="reload()" ></app-add-tender>

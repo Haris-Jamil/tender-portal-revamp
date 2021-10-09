@@ -37,6 +37,11 @@
     border-bottom: 1px solid #dcdde1;
 }
 
+.filterBtn {
+    margin-top: 10px;
+    width: 100%;
+}
+
 /* .form-block {
     padding: 5px 3px 5px 3px;
     background-color: #f5f6fa;

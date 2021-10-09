@@ -11,8 +11,12 @@ export class TenderService {
 
   constructor(private http: HttpClient) { }
 
-  getTenders(page: number): Promise<any> {
-    return this.http.get(`${this.baseUrl}getTenders.php?page=${page}`).toPromise();
+  getTenders(page: number, filter): Promise<any> {
+    let queryStr = '';
+    for (let k in filter) {
+      queryStr += `&${k}=${filter[k]}`
+    }
+    return this.http.get(`${this.baseUrl}getTenders.php?page=${page}${queryStr}`).toPromise();
   }
 
   saveTender(data): Promise<any> {

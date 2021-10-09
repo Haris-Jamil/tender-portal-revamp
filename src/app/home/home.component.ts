@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   tenders: any[] = [];
   page = 1;
   selectedTender: Tender = null;
+  filter = {};
 
   constructor(private tenderService: TenderService) {
     
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   async loadVendors(page): Promise<void> {
-      this.tenders = await this.tenderService.getTenders(page);
+      this.tenders = await this.tenderService.getTenders(page,  this.filter);
   }
 
   openTab(): void {
@@ -46,6 +47,12 @@ export class HomeComponent implements OnInit {
     if (response === 1) {
       this.loadVendors(this.page);
     }
+  }
+
+  applyFilter(filter): void {
+    this.filter = filter;
+    this.page = 1;
+    this.loadVendors(this.page);
   }
 
   gotoPage(page): void {

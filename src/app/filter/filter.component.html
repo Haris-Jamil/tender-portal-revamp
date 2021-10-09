@@ -3,7 +3,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" />
+    <input type="text" class="input-control" [(ngModel)]="filterObj.title" />
 </div>               
 
 <div class="filterTitle" (click)="toggleFilterSection($event)" >
@@ -11,7 +11,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" />
+    <input type="text" class="input-control" [(ngModel)]="filterObj.tenderNo" />
 </div>               
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -51,3 +51,5 @@
     <label><input type="radio" name="closingDate" /> Past 7 days</label><br/>                          
     <label><input type="radio" name="closingDate" /> Past 30 days</label>
 </div> 
+
+<button class="btn btn-primary filterBtn btn-sm" (click)="applyFilter()" >Apply Filter</button>
