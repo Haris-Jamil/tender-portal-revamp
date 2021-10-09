@@ -6,6 +6,7 @@
     margin: 0px 10px 10px 10px;
     padding-top: 30px;
     position: fixed;
+    width: 305px;
 }
 
 .listingContainer {
@@ -21,4 +22,8 @@
     flex: 1;
     margin: 0px 10px 10px 10px;
     padding-top: 30px;  
+}
+
+.hidden {
+    display: none;
 }

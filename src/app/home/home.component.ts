@@ -15,9 +15,9 @@ export class HomeComponent implements OnInit {
   page = 1;
   selectedTender: Tender = null;
   filter = {};
+  showTabs: boolean = false;
 
-  constructor(private tenderService: TenderService, private router: Router) {
-    
+  constructor(private tenderService: TenderService, private router: Router) {    
   }
 
   ngOnInit(): void {
@@ -27,6 +27,12 @@ export class HomeComponent implements OnInit {
     } else {
       this.loadVendors(this.page);    
     }
+
+    this.tenderService.authEvent.subscribe( (user) => {
+      if (user) {
+        this.showTabs = user.type == 2 ? false : true;
+      }
+    });
   }
 
   async loadVendors(page): Promise<void> {

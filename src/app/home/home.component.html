@@ -5,10 +5,10 @@
                 <button class="nav-link active" id="filter-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#filters" type="button" role="tab" aria-controls="filters" aria-selected="true">Filters</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="add-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#addTender" type="button" role="tab" aria-controls="addTender" aria-selected="false">Add Tender</button>
+                <button class="nav-link {{showTabs ? '': 'hidden'}}" id="add-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#addTender" type="button" role="tab" aria-controls="addTender" aria-selected="false">Add Tender</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link disabled" id="edit-tab" data-bs-toggle="tab" data-bs-target="#editTender" type="button" role="tab" aria-controls="editTender" aria-selected="false">Edit Tender</button>
+                <button class="nav-link disabled {{showTabs ? '': 'hidden'}}" id="edit-tab" data-bs-toggle="tab" data-bs-target="#editTender" type="button" role="tab" aria-controls="editTender" aria-selected="false">Edit Tender</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
