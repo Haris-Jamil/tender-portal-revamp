@@ -3,7 +3,12 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 interface filter {
   title: string,
-  tenderNo: string
+  tenderNo: string,
+  location: string,
+  nature: string,
+  companies: string,
+  closingDate: string,
+  publishedDate: string
 }
 
 @Component({
@@ -14,11 +19,17 @@ interface filter {
 export class FilterComponent implements OnInit {
 
   faCaretDown = faCaretDown;
+  companies: string = '';
   @Output() emitFilter: EventEmitter<any> = new EventEmitter();
 
   filterObj: filter = {
     title: '',
-    tenderNo: ''
+    tenderNo: '',
+    location: '',
+    nature: '',
+    companies: '',
+    closingDate: '',
+    publishedDate: ''
   }
 
   constructor() { }
@@ -47,6 +58,24 @@ export class FilterComponent implements OnInit {
         document.querySelectorAll('.filterSection').forEach( ele => (<any>ele).style.display = 'none' );
         clickEle.nextSibling.style.display = 'block';
     }
-}
+  }
+
+  setCheckbox(event, filter) {
+    const val = event.target.value;
+    if (this.filterObj[filter].includes(val)) {
+      this.filterObj[filter] = this.filterObj[filter].replace(`${val},`, '');
+    } else {
+      this.filterObj[filter] += `${val},`;
+    }
+  }
+
+  changeDate(event, filter) {
+      let date = event.target.value;
+      if(date) {
+          const parts = date.split('-');          
+          date = [ parts[2], parts[1], parts[0] ].join('-');
+      }
+      this.filterObj[filter] = date;
+  }
 
 }

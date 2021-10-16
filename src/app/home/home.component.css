@@ -27,3 +27,16 @@
 .hidden {
     display: none;
 }
+
+.notFoundMsg {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031; /* High z-index so it is on top of the page */
+    top: 40%;
+    right: 40%;
+  }

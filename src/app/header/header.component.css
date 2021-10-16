@@ -50,14 +50,12 @@
     font-weight: bold;
 }
 
-.userIconContainer {
-    margin-right: 40px;
-}
-
 .userIcon {
     color: #f5f6fa;
+    width: 10px;
+    height: 10px;
 }
 
-button {
+.my-btn {
     margin-right: 10px;
 }

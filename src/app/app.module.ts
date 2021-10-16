@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { DetailComponent } from './detail/detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AppliedFilterComponent } from './applied-filter/applied-filter.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     HomeComponent,
     DetailComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AppliedFilterComponent
   ],
   imports: [
     BrowserModule,

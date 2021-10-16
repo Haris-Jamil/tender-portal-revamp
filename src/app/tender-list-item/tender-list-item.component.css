@@ -26,44 +26,50 @@
 }
 
 .detailsBtn {
-    background-color: #019ce9;
-    width: 80px;
-    border: none;
+    border: 1px solid rgb(138, 136, 136);        
+    width: 60px;
     border-radius: 2px;
     padding: 1px 1px;
-    color: white;
+    color: rgb(107, 106, 106);
     margin-right: 5px;
+    font-size: 12px;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
 }
 .detailsBtn:hover {
     background-color: #01699c;
+    color: white;   
 }
 
 .editBtn {
-    background-color: #fdcb6e;
-    width: 80px;
-    border: none;
+    border: 1px solid rgb(138, 136, 136);        
+    width: 60px;
     border-radius: 2px;
     padding: 1px 1px;
-    color: white;
+    color: rgb(107, 106, 106);
     margin-right: 5px;
+    font-size: 12px;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
 }
 
 .editBtn:hover {
     background-color: #e6ab40;
+    color: white;
 }
 
 .deleteBtn {
-    background-color: #EE5A24;
-    width: 80px;
-    border: none;
+    border: 1px solid rgb(138, 136, 136);        
+    width: 60px;
     border-radius: 2px;
     padding: 1px 1px;
-    color: white;
+    color: rgb(107, 106, 106);
     margin-right: 5px; 
+    font-size: 12px;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
 }
 
 .deleteBtn:hover {
     background-color: #EA2027;
+    color: white;
 }
 
 .status {

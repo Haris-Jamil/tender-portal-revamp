@@ -47,7 +47,7 @@ export class TenderListItemComponent implements OnInit {
   }
 
   gotoDetail() {
-    this.router.navigate(['/detail', this.tender.id]);
+    window.open(`/detail/${this.tender.id}`, "_blank");
   }
 
   emitdeleteEvent(): void {

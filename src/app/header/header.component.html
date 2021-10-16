@@ -8,17 +8,38 @@
     </div> -->
 
     <div class="userDetailContainer" *ngIf="!showBtn" >
-        <div class="userNameContainer">
+        <!-- <div class="userNameContainer">
             <span class="userName">Hello, {{username}}</span>            
         </div>
         <div class="userIconContainer" >
             <fa-icon [icon]="faUserCircle" size="2x" class="userIcon" ></fa-icon>
         </div>
-        <button class="btn btn-primary btn-sm" (click)="logout()" >Logout</button>
+        <button class="btn btn-primary btn-sm" (click)="logout()" >Logout</button> -->
+        <!-- <div class="btn-group">
+            <button type="button" class="btn btn-danger">Hello, {{username}}</button>
+            <button type="button" class="btn btn-danger dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                
+                <fa-icon [icon]="faUserCircle" size="2x" class="userIcon" ></fa-icon>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" (click)="logout()" href="javascript:void(0)">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>     -->
+        <div class="btn-group" style="margin-right: 20px;">
+            <button type="button" class="btn btn-primary">Hello, {{username}}</button>
+            <button type="button" class="btn btn-primary dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <fa-icon [icon]="faUserCircle" size="1x" class="userIcon" ></fa-icon>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="javascript:void(0)">Manage Users</a></li>
+              <li><a class="dropdown-item" (click)="logout()" href="javascript:void(0)">Logout</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="userDetailContainer" *ngIf="showBtn" >
-        <button class="btn btn-primary btn-sm" (click)="goto('login')" >Login</button>
-        <button class="btn btn-primary btn-sm" (click)="goto('register')" >Register</button>
+        <button class="btn btn-primary btn-sm my-btn" (click)="goto('login')" >Login</button>
+        <button class="btn btn-primary btn-sm my-btn" (click)="goto('register')" >Register</button>
     </div>
 </div>

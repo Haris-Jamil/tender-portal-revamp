@@ -28,9 +28,22 @@
     <div class="placeholderContainer" ></div>
 
     <div class="listingContainer" >
-        <div><b>page # {{page}}</b></div>  
-        <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>
-        <app-pagination *ngIf="tenders.length" (emitPage)="gotoPage($event)" ></app-pagination>
+        <div [ngClass]="loading ? 'hidden' : '' " >
+            <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
+            <div *ngIf="tenders.length" ><b>page # {{page}}</b></div>  
+            <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
+            <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
+            <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >
+                <hr>
+                <h4 class="notFoundMsg" >End of Results</h4>
+            </ng-container>
+        </div>
+        <div [ngClass]="!loading ? 'hidden' : '' ">
+            <div class="spinner spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        
     </div>
     
 </div>

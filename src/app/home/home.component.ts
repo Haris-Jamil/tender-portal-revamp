@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   selectedTender: Tender = null;
   filter = {};
   showTabs: boolean = false;
+  loading: boolean = false;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
     if (!user) {
       this.router.navigate(['/login']);
     } else {
-      this.loadVendors(this.page);    
+      this.loadTenders(this.page);    
     }
 
     this.tenderService.authEvent.subscribe( (user) => {
@@ -35,8 +36,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  async loadVendors(page): Promise<void> {
+  async loadTenders(page): Promise<void> {
+      this.loading = true;
       this.tenders = await this.tenderService.getTenders(page,  this.filter);
+      this.loading = false;
   }
 
   openTab(): void {
@@ -57,23 +60,23 @@ export class HomeComponent implements OnInit {
     console.log('id', id)
     const response = await this.tenderService.deleteTenderById(id);
     if (response === 1) {
-      this.loadVendors(this.page);
+      this.loadTenders(this.page);
     }
   }
 
   applyFilter(filter): void {
     this.filter = filter;
     this.page = 1;
-    this.loadVendors(this.page);
+    this.loadTenders(this.page);
   }
 
   gotoPage(page): void {
     this.page = page;
-    this.loadVendors(this.page);
+    this.loadTenders(this.page);
   }
 
   reload(): void {
-   this.loadVendors(this.page);
+   this.loadTenders(this.page);
   }
   
 }

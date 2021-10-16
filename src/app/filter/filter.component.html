@@ -19,26 +19,43 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" />
-</div>                      
+    <input type="text" class="input-control" [(ngModel)]="filterObj.location" />
+</div>
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Company</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="OGDCL" /> OGDCL</label><br/>                           
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PAKRAIL" /> PAKRAIL</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PARCO" /> PARCO</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PAK" /> PPRA-PAK</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PUN" /> PPRA-PUN</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PSO" /> PSO</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="POF" /> POF</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="SNGPL" /> SNGPL</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PIA" /> PIA</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPL" /> PPL</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="MISCELLANEOUS" /> MISCELLANEOUS</label>
+</div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
     <span>Project Nature</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>   
 <div class="filterSection">
-    <label><input type="checkbox" /> National</label><br/>                           
-    <label><input type="checkbox" /> International</label>  
+    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="Local" /> Local</label><br/>                           
+    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="National" /> National</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="International" /> International</label>  
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
     <span>Published Date</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
-<div class="filterSection">
-    <label><input type="radio" name="publishedDate" checked={{true}} /> None</label><br/>
-    <label><input type="radio" name="publishedDate" /> Past 7 days</label><br/>               
-    <label><input type="radio" name="publishedDate" /> Past 30 days</label>
+<div class="filterSection" style="padding-right:15px" >
+    <input type="date" class="form-control" name="publishedDate" (change)="changeDate($event, 'publishedDate')" >
 </div> 
 
 
@@ -46,10 +63,8 @@
     <span>Closing Date</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
-<div class="filterSection border-bottom">
-    <label><input type="radio" name="closingDate" checked={{true}}  /> None</label><br/>
-    <label><input type="radio" name="closingDate" /> Past 7 days</label><br/>                          
-    <label><input type="radio" name="closingDate" /> Past 30 days</label>
+<div class="filterSection border-bottom" style="padding-right:15px">
+    <input type="date" class="form-control" name="closingDate" (change)="changeDate($event, 'closingDate')" >
 </div> 
 
 <button class="btn btn-primary filterBtn btn-sm" (click)="applyFilter()" >Apply Filter</button>
