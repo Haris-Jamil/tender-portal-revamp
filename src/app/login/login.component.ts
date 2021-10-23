@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       if (response == 0) {
         this.errorMsg = 'wrong username or password'
       } else {
-        this.tenderService.setUser(response[0]);
+        this.tenderService.setUser(response);
         this.router.navigate(['/home'])
       }
     }

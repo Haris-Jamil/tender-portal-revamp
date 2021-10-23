@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     this.tenderService.authEvent.subscribe( (user) => {
       if (user) {
-        this.showTabs = user.type == 2 ? false : true;
+        this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
       }
     });
   }

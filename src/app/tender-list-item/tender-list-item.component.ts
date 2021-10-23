@@ -14,6 +14,7 @@ export class TenderListItemComponent implements OnInit {
   @Output() delete: EventEmitter<string> = new EventEmitter();
   status: string;
   blurMode: boolean = false
+  isAdmin: boolean = false;
 
   constructor(private router: Router, private tenderService: TenderService) { }
 
@@ -37,7 +38,8 @@ export class TenderListItemComponent implements OnInit {
 
     this.tenderService.authEvent.subscribe( (user) => {
       if (user) {
-        this.blurMode = user.type == 2 ? true : false;
+        this.blurMode = user.type == 1 ? true : false; // only active blur mode for non trial/subscribed user
+        this.isAdmin = user.type == 0 ? true : false;
       }
     });
   }

@@ -35,12 +35,8 @@ export class RegisterComponent implements OnInit {
     } else {
       this.errorMsg = '';
       const response: any = await this.tenderService.register(this.username, this.password);
-      if (response && response.length == 0) {
-        this.tenderService.setUser({
-          username: this.username,
-          type: 2
-        });
-        this.router.navigate(['/home'])        
+      if (response && response.length == 0) {       
+        this.router.navigate(['/login'])        
       } else {
         this.errorMsg = 'some error occured'
       }

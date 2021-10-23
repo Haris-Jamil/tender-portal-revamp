@@ -12,8 +12,8 @@
         <p class="closingDate" >Closing Data: {{tender.closingDate}}</p>
         <div class="btncontainer" >            
             <button class="detailsBtn" (click)="gotoDetail()">Details</button>
-            <button class="editBtn" (click)="emitEditEvent()" >Edit</button>
-            <button class="deleteBtn" (click)="emitdeleteEvent()" >Delete</button>
+            <button *ngIf="isAdmin" class="editBtn" (click)="emitEditEvent()" >Edit</button>
+            <button *ngIf="isAdmin" class="deleteBtn" (click)="emitdeleteEvent()" >Delete</button>
         </div>
     </div>
 

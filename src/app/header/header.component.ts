@@ -34,8 +34,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([`/${route}`]);
   }
 
-  logout(): void {
-    this.tenderService.logout();
+  async logout(): Promise<void> {
+    await this.tenderService.logout()
     this.router.navigate(['/login']);
   }
 
