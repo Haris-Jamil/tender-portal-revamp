@@ -63,3 +63,12 @@
 .modal-header {
     border-bottom: 0px;
 }
+
+.subscribeBox {
+    text-align: center;
+    margin-top: 30px;
+    background-color: #2f3542;
+    border-radius: 5px;
+    color: white;
+    padding: 20px 10px;
+}

@@ -16,13 +16,17 @@ import { DetailComponent } from './detail/detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppliedFilterComponent } from './applied-filter/applied-filter.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { UserManagerComponent } from './user-manager/user-manager.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:message', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'detail/:id', component: DetailComponent },
+  { path: 'user-manager', component: UserManagerComponent }
 ];
 
 
@@ -38,7 +42,8 @@ const appRoutes: Routes = [
     DetailComponent,
     LoginComponent,
     RegisterComponent,
-    AppliedFilterComponent
+    AppliedFilterComponent,
+    UserManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +51,10 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(
-      appRoutes
-    )
+      appRoutes,
+      {onSameUrlNavigation: 'reload'}
+    ),
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],  

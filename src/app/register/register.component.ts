@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   contactNumber: string;
   orgName: string;
   city: string;
+  email: string;
 
   errorMsg: string;
 
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
   }
 
   async register(): Promise<void> {
-    if (!this.username || !this.password || !this.contactNumber || !this.orgName || !this.city) {
+    if (!this.username || !this.password || !this.contactNumber || !this.orgName || !this.city || !this.email) {
       this.errorMsg = '*Please provide all fields';
     } else if (this.password !== this.confirmPassword) {
       this.errorMsg = '*Please make sure passwords are same';
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit {
         password: this.password,
         contact: this.contactNumber,
         org: this.orgName,
-        city: this.city
+        city: this.city,
+        email: this.email
       });
       if (response && response.length == 0) {       
         this.router.navigate(['/login'])        

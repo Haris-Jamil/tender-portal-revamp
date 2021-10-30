@@ -17,7 +17,12 @@ export class TenderService {
 
   setUser(userData): void {
     this.authEvent.next(userData[0]);    
-    localStorage.setItem('user', JSON.stringify({username: userData[0].username, type: userData[0].type, userId: userData[0].id}));
+    localStorage.setItem('user', JSON.stringify({
+      username: userData[0].username.trim(), 
+      type: userData[0].type, 
+      userId: userData[0].id,
+      trialTaken: userData[0].trialTaken
+    }));
     localStorage.setItem('sessionId', userData[1]);
   }
 
@@ -51,7 +56,7 @@ export class TenderService {
 
   register(data): Promise<any> {
     return this.get(`${this.baseUrl}register.php?username=${data.username}
-    &password=${data.password}&contact=${data.contact}&org=${data.org}&city=${data.city}`);
+    &password=${data.password}&contact=${data.contact}&org=${data.org}&city=${data.city}&email=${data.email}`);
   }
 
   logout(): Promise<any> {    
@@ -77,6 +82,10 @@ export class TenderService {
   activateTrial(): Promise<any> {
     const userId = this.getCurrentUser().userId;
     return this.get(`${this.baseUrl}activateTrial.php?userId=${userId}`);
+  }
+
+  getUsers(): Promise<any> {
+    return this.get(`${this.baseUrl}getUsers2.php?dummy=1`);
   }
 
   get(url): Promise<any> {

@@ -22,6 +22,16 @@
                 <app-add-tender [editTender]="selectedTender" (saved)="reload()" ></app-add-tender>
             </div>
         </div>
+
+        <div *ngIf="trialUser" class="subscribeBox" >
+            <h5>Watching content in trial mode</h5>
+            <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
+        </div>
+
+        <div *ngIf="trialTaken" class="subscribeBox" >
+            <h5>You have utilized your 7 days free trial</h5>
+            <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
+        </div>
         
     </div>
 
@@ -58,12 +68,49 @@
                 <h3 class="heading" >Please purchase subscription</h3>
                 <h5 class="heading" >OR</h5>
                 <h3 class="headingLast" >Activate your 7 days free trial now!</h3>
-                <button class="btn btn-lg btn-success" style="margin-right:20px" >Subscribe</button>
-                <button class="btn btn-lg btn-primary" (click)="activateTrial()" >Activate Trial</button>
+                <button class="btn btn-lg btn-success" style="margin-right:20px" (click)="showSubConfirm()" >Subscribe</button>
+                <button *ngIf="!trialTaken" class="btn btn-lg btn-primary" (click)="activateTrial()" >Activate Trial</button>
+                <button *ngIf="trialTaken" class="btn btn-lg btn-primary disabled" (click)="activateTrial()" >Free Trial Utilized</button>
             </div>
           </div>
         </div>
       </div>
     
 </div>
+
+<swal
+  #activateSuccessSwal
+  title="Trial Activated"
+  text="You can view all tender related info for 7 days now!
+              You need to login again for changes to get effect"
+  icon="success"
+  [focusCancel]="true"
+  [swalVisible]="trialSuccessSwalVisible"
+  (didClose)="trialSuccessPopupClosed()"
+  >
+</swal>
+
+<swal
+  #activateSuccessSwal
+  title="Trial Activated"
+  text="You can view all tender related info for 7 days now!
+              You need to login again for changes to get effect"
+  icon="success"
+  [focusCancel]="true"
+  [swalVisible]="trialSuccessSwalVisible"
+  (didClose)="trialSuccessPopupClosed()"
+  >
+</swal>
+
+<swal
+  #subscribeSwal
+  title="Subscribe"
+  text="Please click ok to send a subscription request to our representative"
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  [swalVisible]="subscribeSwalVisible"
+  (confirm)="deleteFile(file)"
+  (didClose)="subscribeSwalVisible = false">
+</swal>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TenderService } from '../tender.service';
-import {Router} from "@angular/router"
+import {Router, ActivatedRoute, Params} from "@angular/router"
 
 @Component({
   selector: 'app-login',
@@ -13,13 +13,16 @@ export class LoginComponent implements OnInit {
   password: string;
   errorMsg: string;
 
-  constructor(private tenderService: TenderService, private router: Router) { }
+  constructor(private tenderService: TenderService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
     if (user) {
       this.router.navigate(['/home']);
     }
+    this.route.params.subscribe((params: Params) => {
+      this.errorMsg = params['message']
+    });
   }
 
   async login(): Promise<void> {

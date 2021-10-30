@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tender } from '../models/Tender';
 import { TenderService } from '../tender.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js'; 
 
 declare const bootstrap;
 
@@ -20,15 +21,20 @@ export class HomeComponent implements OnInit {
   showTabs: boolean = false;
   loading: boolean = false;
   trialModal;
+  trialSuccessSwalVisible = false;
+  subscribeSwalVisible = false;
+  trialUser = false;
+  trialTaken = false;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    let user = localStorage.getItem('user');
     if (!user) {
       this.router.navigate(['/login']);
     } else {
+      this.handleUser(JSON.parse(user));
       this.loadTenders(this.page);    
     }
 
@@ -42,15 +48,25 @@ export class HomeComponent implements OnInit {
     });
 
     this.tenderService.authEvent.subscribe( (user) => {
-      if (user) {
-        this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
-        if (user.type == 1) {
-            setTimeout( () => {
-              this.trialModal.show();
-            }, 1000 * 5);            
-        }
-      }
+        this.handleUser(user);
     });    
+  }
+
+  handleUser(user): void {
+    if (user) {
+      this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
+      if (user.type == 1) {
+          if ( user.trialTaken == 1) {
+            this.trialTaken = true;
+          }
+          setTimeout( () => {
+            this.trialModal.show();
+          }, 1000 * 5);            
+      }
+      if (user.type  == 2) {
+          this.trialUser = true;
+      }      
+    }
   }
 
   closeModal(): void {
@@ -58,11 +74,21 @@ export class HomeComponent implements OnInit {
     document.querySelectorAll('.modal-backdrop').forEach( (el) => {
         el.remove();
     });
+    if (document.querySelector('.modal-backdrop')) {
+      document.querySelector('.modal-backdrop').remove();
+    }
+    
   }
 
   async loadTenders(page): Promise<void> {
       this.loading = true;
-      this.tenders = await this.tenderService.getTenders(page,  this.filter);
+      const response = await this.tenderService.getTenders(page,  this.filter);
+      if (response && response.message == 'trial expired') {
+        await this.tenderService.logout()
+        this.router.navigate(['/login', 'trial period expired, Please login again to continue']);
+      } else {
+        this.tenders = response;
+      }
       this.loading = false;
   }
 
@@ -104,7 +130,21 @@ export class HomeComponent implements OnInit {
   }
 
   async activateTrial(): Promise<void> {
-    await this.tenderService.activateTrial();
+    const response = await this.tenderService.activateTrial();
+    if (response === 1) {
+        this.closeModal();
+        this.trialSuccessSwalVisible = true;
+    }
   }
-  
+
+  async trialSuccessPopupClosed(): Promise<any> {
+    this.trialSuccessSwalVisible = false;    
+    await this.tenderService.logout()
+    this.router.navigate(['/login', 'Trial activated please login to continue']);
+  }
+
+  showSubConfirm(): void {
+      this.subscribeSwalVisible = true;
+  }
+ 
 }
