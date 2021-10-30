@@ -12,6 +12,10 @@ export class RegisterComponent implements OnInit {
   username: string;
   password: string;
   confirmPassword: string;
+  contactNumber: string;
+  orgName: string;
+  city: string;
+
   errorMsg: string;
 
   constructor(private tenderService: TenderService, private router: Router) { }
@@ -24,8 +28,8 @@ export class RegisterComponent implements OnInit {
   }
 
   async register(): Promise<void> {
-    if (!this.username || !this.password) {
-      this.errorMsg = '*Please provide both username and password';
+    if (!this.username || !this.password || !this.contactNumber || !this.orgName || !this.city) {
+      this.errorMsg = '*Please provide all fields';
     } else if (this.password !== this.confirmPassword) {
       this.errorMsg = '*Please make sure passwords are same';
     } else if (this.username.length < 5 || this.username.length > 20) {
@@ -34,7 +38,13 @@ export class RegisterComponent implements OnInit {
       this.errorMsg = '*password should be 5 to 20 characters long';
     } else {
       this.errorMsg = '';
-      const response: any = await this.tenderService.register(this.username, this.password);
+      const response: any = await this.tenderService.register({
+        username: this.username,
+        password: this.password,
+        contact: this.contactNumber,
+        org: this.orgName,
+        city: this.city
+      });
       if (response && response.length == 0) {       
         this.router.navigate(['/login'])        
       } else {

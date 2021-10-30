@@ -40,3 +40,26 @@
     top: 40%;
     right: 40%;
   }
+
+#trialModal .modal-body {
+    text-align: center;
+}
+
+#trialModal #seprator {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+#trialModal .heading {
+    color: #2c3e50;
+}
+
+#trialModal .headingLast {
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.modal-header {
+    border-bottom: 0px;
+}

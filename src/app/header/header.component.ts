@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { TenderService } from '../tender.service';
@@ -12,6 +12,9 @@ export class HeaderComponent implements OnInit {
   faUserCircle = faUserCircle
   showBtn = true;
   username: string;
+  isAdmin: boolean = false;
+  isStrayUser: boolean = false;
+
   constructor(private tenderService: TenderService, private router: Router) { }
 
   ngOnInit(): void {
@@ -21,6 +24,8 @@ export class HeaderComponent implements OnInit {
       } else {
         this.showBtn = false;
         this.username = auth.username;
+        this.isAdmin = auth.type == 0 ? true : false;
+        this.isStrayUser = auth.type == 1 ? true : false;
       }
     });
     let user = localStorage.getItem('user');
@@ -28,6 +33,10 @@ export class HeaderComponent implements OnInit {
       user = JSON.parse(user);
       this.tenderService.authEvent.next(user);
     } 
+  }
+
+  showPopup(): void {
+      this.tenderService.showPopup.next(true);
   }
 
   goto(route): void {

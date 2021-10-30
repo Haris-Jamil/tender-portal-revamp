@@ -1,4 +1,4 @@
-import { Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
@@ -8,13 +8,16 @@ import { BehaviorSubject } from 'rxjs';
 export class TenderService {
 
   baseUrl = 'https://tii-usa.com/tender-tracker-new/api/';
-  @Output() authEvent: BehaviorSubject<any> = new BehaviorSubject(null);
+
+  // candidates for moving into a seperate communication service
+  authEvent: BehaviorSubject<any> = new BehaviorSubject(null);
+  showPopup: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
 
   setUser(userData): void {
     this.authEvent.next(userData[0]);    
-    localStorage.setItem('user', JSON.stringify({username: userData[0].username, type: userData[0].type}));
+    localStorage.setItem('user', JSON.stringify({username: userData[0].username, type: userData[0].type, userId: userData[0].id}));
     localStorage.setItem('sessionId', userData[1]);
   }
 
@@ -46,8 +49,9 @@ export class TenderService {
     return this.get(`${this.baseUrl}login2.php?username=${username}&password=${password}`);
   }
 
-  register(username, password): Promise<any> {
-    return this.get(`${this.baseUrl}register.php?username=${username}&password=${password}`);
+  register(data): Promise<any> {
+    return this.get(`${this.baseUrl}register.php?username=${data.username}
+    &password=${data.password}&contact=${data.contact}&org=${data.org}&city=${data.city}`);
   }
 
   logout(): Promise<any> {    
@@ -63,6 +67,18 @@ export class TenderService {
     });
   }
 
+  getCurrentUser(): any {
+      let user = localStorage.getItem('user');
+      if (user) {
+          return JSON.parse(user);
+      }
+  }
+
+  activateTrial(): Promise<any> {
+    const userId = this.getCurrentUser().userId;
+    return this.get(`${this.baseUrl}activateTrial.php?userId=${userId}`);
+  }
+
   get(url): Promise<any> {
       url += `&sid=${localStorage.getItem('sessionId')}`;
       return this.http.get(url).toPromise();
@@ -71,8 +87,6 @@ export class TenderService {
   post(url, data): Promise<any> {
     data['sid'] = localStorage.getItem('sessionId');
     return this.http.post(url, data).toPromise();
-  }
-
-  
+  } 
 
 }

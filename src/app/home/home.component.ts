@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Tender } from '../models/Tender';
 import { TenderService } from '../tender.service';
 
+declare const bootstrap;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +19,7 @@ export class HomeComponent implements OnInit {
   filter = {};
   showTabs: boolean = false;
   loading: boolean = false;
+  trialModal;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -29,10 +32,31 @@ export class HomeComponent implements OnInit {
       this.loadTenders(this.page);    
     }
 
+    const modalEl = document.querySelector('#trialModal');
+    this.trialModal = bootstrap.Modal.getOrCreateInstance(modalEl, {});
+
+    this.tenderService.showPopup.subscribe( (show) => {
+      if (show) {
+        this.trialModal.show();
+      }
+    });
+
     this.tenderService.authEvent.subscribe( (user) => {
       if (user) {
         this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
+        if (user.type == 1) {
+            setTimeout( () => {
+              this.trialModal.show();
+            }, 1000 * 5);            
+        }
       }
+    });    
+  }
+
+  closeModal(): void {
+    this.trialModal.hide();
+    document.querySelectorAll('.modal-backdrop').forEach( (el) => {
+        el.remove();
     });
   }
 
@@ -77,6 +101,10 @@ export class HomeComponent implements OnInit {
 
   reload(): void {
    this.loadTenders(this.page);
+  }
+
+  async activateTrial(): Promise<void> {
+    await this.tenderService.activateTrial();
   }
   
 }
