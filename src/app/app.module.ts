@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'detail/:id', component: DetailComponent },
-  { path: 'user-manager', component: UserManagerComponent }
+  { path: 'dashboard', component: UserManagerComponent }
 ];
 
 

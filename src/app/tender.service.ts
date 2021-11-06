@@ -88,6 +88,10 @@ export class TenderService {
     return this.get(`${this.baseUrl}getUsers2.php?dummy=1`);
   }
 
+  addSubscription(startDate, endDate, amount, userId): Promise<any> {
+    return this.get(`${this.baseUrl}addSubscription.php?startDate=${startDate}&endDate=${endDate}&amount=${amount}&userId=${userId}`);
+  }
+
   get(url): Promise<any> {
       url += `&sid=${localStorage.getItem('sessionId')}`;
       return this.http.get(url).toPromise();

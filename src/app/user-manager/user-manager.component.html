@@ -1,1 +1,69 @@
-<p>user-manager works!</p>
+<div class="container" >
+    <input type="text" id="filterUserInp" class="form-control form-inline" placeholder="filter user by username..." (input)="filterUser($event)" />
+    <div class="table-container" >
+        <table class="table table-hover">
+            <thead>
+              <tr class="table-primary" >
+                <th scope="col">username</th>
+                <th scope="col">type</th>
+                <th scope="col">trialTaken</th>
+                <th scope="col">trialLastDate</th>
+                <th scope="col">phone</th>
+                <th scope="col">orgname</th>
+                <th scope="col">email</th>
+                <th scope="col">city</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filteredUsers" (click)="loadSubscriptions(user.id)" >        
+                <td>{{user.username}}</td>
+                <td>{{user.type}}</td>
+                <td>{{user.trialTaken == 0 ? 'No' : 'Yes'}}</td>
+                <td>{{user.trialLastDate}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.orgname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.city}}</td>
+              </tr>      
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container-bottom">
+      <div class="sectionTitle" >
+        <p>User Subscriptions</p>
+      </div>
+      <div class="no-user-selected" *ngIf="!selectedUser" >
+        <fa-icon [icon]="faExclamationCircle" size="4x"></fa-icon>
+        <p>Please select a user from table above</p>
+      </div>
+      <div class="user-selected" *ngIf="selectedUser" >
+        <p><b>Selected User: </b>{{selectedUser.username}}</p>
+        <div class="row g-3" >
+          <div class="col-md-3" >
+            <label>start date:</label>
+            <input type="date" [(ngModel)]="startDate" class="form-control form-control-sm" />
+          </div>
+
+          <div class="col-md-3" >
+            <label>end date:</label>
+            <input type="date" [(ngModel)]="endDate" class="form-control form-control-sm" />
+          </div>
+
+          <div class="col-md-3" >
+            <label>Amount recieved:</label>
+            <input type="number" [(ngModel)]="amount" class="form-control form-control-sm" />
+          </div>
+          <div class="col-md-3" >
+            <button id="subscribeBtn" class="btn btn-sm btn-primary" (click)="addSubscription()" >
+              Add Subscription
+              <fa-icon [icon]="faPlus"></fa-icon>
+            </button>
+          </div>          
+          
+        </div>
+
+      </div>
+    </div>
+    
+</div>

@@ -1,0 +1,45 @@
+#filterUserInp {
+    width: 300px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.table-container-bottom {
+    max-height: 300px;
+    overflow-y: scroll;
+    margin-top: 50px;
+    border: 1px solid #dcdde1;
+}
+
+.no-user-selected {
+    text-align: center;
+    padding: 30px;
+}
+
+.no-user-selected p {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.sectionTitle {
+    text-align: center;
+    background-color: #cfe2ff;
+}
+
+.sectionTitle p{
+    font-weight: bold;
+    padding: 8px 0px;
+}
+
+.user-selected {
+    padding: 2px 20px 20px 20px;
+}
+
+#subscribeBtn {
+    margin-top: 23px;
+}

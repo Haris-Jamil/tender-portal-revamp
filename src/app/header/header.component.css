@@ -16,6 +16,7 @@
 .logo {
     color: #f5f6fa;
     margin-left: 20px;
+    cursor: pointer;
 }
 
 /* .searchbarContainer {
