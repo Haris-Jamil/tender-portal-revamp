@@ -109,7 +109,29 @@
   icon="question"
   [showCancelButton]="true"
   [focusCancel]="true"
+  (confirm)="sendSubRequest()"
   [swalVisible]="subscribeSwalVisible"
   (didClose)="subscribeSwalVisible = false">
 </swal>
 
+<swal
+  #subRequestSuccessSwal
+  title="Subscrition Request Sent"
+  text="Thanks for your interest, we will contact you shortly!"
+  icon="success"
+  [focusCancel]="true"
+  [swalVisible]="requestSendSwalVisible"
+  (didClose)="requestSendSwalVisible = false"
+  >
+</swal>
+
+<swal
+  #subRequestErrorSwal
+  title="Subscrition Request Failed"
+  text="some error occured, Please try again"
+  icon="error"
+  [focusCancel]="true"
+  [swalVisible]="requestFailedSwalVisible"
+  (didClose)="requestFailedSwalVisible = false"
+  >
+</swal>

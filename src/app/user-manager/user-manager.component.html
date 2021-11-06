@@ -29,7 +29,7 @@
         </table>
     </div>
 
-    <div class="table-container-bottom">
+    <div class="container-bottom">
       <div class="sectionTitle" >
         <p>User Subscriptions</p>
       </div>
@@ -56,13 +56,71 @@
           </div>
           <div class="col-md-3" >
             <button id="subscribeBtn" class="btn btn-sm btn-primary" (click)="addSubscription()" >
-              Add Subscription
+              Add New Subscription
               <fa-icon [icon]="faPlus"></fa-icon>
             </button>
-          </div>          
-          
+          </div>                    
         </div>
 
+        <div class="row" >
+          <div class="table-container-bottom" >
+            <ng-container *ngIf="subs.length" >
+              <table class="table table-hover">
+                <thead>
+                  <tr class="table-primary" >
+                    <th scope="col">start date</th>
+                    <th scope="col">end date</th>
+                    <th scope="col">amount paid</th>
+                    <th scope="col">activation date</th>
+                    <th scope="col">actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of subs" >        
+                    <td>{{s.startDate}}</td>
+                    <td>{{s.endDate}}</td>
+                    <td>{{s.amount}}</td>
+                    <td>{{s.timestamp}}</td>
+                    <td class="icon-delete" ><fa-icon [icon]="faTrashAlt"></fa-icon></td>                
+                  </tr>      
+                </tbody>
+              </table>
+            </ng-container>            
+            <ng-container *ngIf="!subs.length" >
+              <div class="no-user-selected">
+                <fa-icon [icon]="faExclamationCircle" size="2x"></fa-icon>
+                <p>No Subscriptions</p>
+              </div>
+            </ng-container>
+
+          </div>
+        </div>                          
+      </div>
+
+
+    </div>
+
+    <div class="container-bottom" >
+      <div class="sectionTitle" >
+        <p>Subscription Requests</p>
+      </div>
+      <div class="table-container-bottom" >
+        <table class="table table-hover">
+            <thead>
+              <tr class="table-primary" >
+                <th scope="col">userId</th>
+                <th scope="col">Requested On</th>
+                <th scope="col">status</th>                    
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sr of subRequests">        
+                <td>{{sr.userId}}</td>
+                <td>{{sr.request_date}}</td>
+                <td>{{sr.status}}</td>
+              </tr>      
+            </tbody>
+        </table>
       </div>
     </div>
     

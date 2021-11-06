@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   trialModal;
   trialSuccessSwalVisible = false;
   subscribeSwalVisible = false;
+  requestSendSwalVisible = false;
+  requestFailedSwalVisible = false;
   trialUser = false;
   trialTaken = false;
 
@@ -145,6 +147,18 @@ export class HomeComponent implements OnInit {
 
   showSubConfirm(): void {
       this.subscribeSwalVisible = true;
+  }
+
+  async sendSubRequest(): Promise<any> {
+      const response = await this.tenderService.sendSubRequest();            
+      if (response === 1) {
+        this.closeModal();
+        this.subscribeSwalVisible = false;        
+        this.requestSendSwalVisible = true;
+      } else {
+        this.subscribeSwalVisible = false;
+        this.requestFailedSwalVisible = true;
+      }
   }
  
 }

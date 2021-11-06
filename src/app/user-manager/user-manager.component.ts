@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TenderService } from '../tender.service';
-import { faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationCircle, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-user-manager',
@@ -11,8 +11,11 @@ export class UserManagerComponent implements OnInit {
 
   users: any[];
   filteredUsers: any[];
+  subs: any[];
+  subRequests: any[];
   selectedUser: any;
   faExclamationCircle = faExclamationCircle;
+  faTrashAlt = faTrashAlt;
   faPlus = faPlus;
 
   startDate: any;
@@ -23,6 +26,7 @@ export class UserManagerComponent implements OnInit {
 
   ngOnInit(): void {
       this.fetchUsers();
+      this.loadSubsRequests();
   }
 
   async fetchUsers(): Promise<any> {
@@ -46,13 +50,19 @@ export class UserManagerComponent implements OnInit {
         this.startDate = undefined;
         this.endDate = undefined;
         this.amount = undefined;
+        this.loadSubscriptions(this.selectedUser.id);
       }
     }
     
   }
 
-  loadSubscriptions(userId): void {
+  async loadSubscriptions(userId): Promise<void> {
       this.selectedUser = this.users.filter( u => u.id == userId )[0];
+      this.subs = await this.tenderService.getSubscriptions(this.selectedUser.id);
   }
+
+  async loadSubsRequests(): Promise<void> {
+    this.subRequests = await this.tenderService.getSubRequests();
+}
 
 }

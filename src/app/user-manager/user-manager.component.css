@@ -5,13 +5,22 @@
 }
 
 .table-container {
-    max-height: 300px;
+    max-height: 200px;
     overflow-y: scroll;
 }
 
 .table-container-bottom {
-    max-height: 300px;
     overflow-y: scroll;
+    max-height: 164px;
+    margin-top: 30px;
+    border: 1px solid #dcdde1;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+.container-bottom {
+    max-height: 350px;
     margin-top: 50px;
     border: 1px solid #dcdde1;
 }
@@ -42,4 +51,8 @@
 
 #subscribeBtn {
     margin-top: 23px;
+}
+
+.icon-delete:hover {
+    color: #e74c3c;
 }

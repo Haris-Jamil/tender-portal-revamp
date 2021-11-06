@@ -92,6 +92,19 @@ export class TenderService {
     return this.get(`${this.baseUrl}addSubscription.php?startDate=${startDate}&endDate=${endDate}&amount=${amount}&userId=${userId}`);
   }
 
+  getSubscriptions(userId): Promise<any> {
+    return this.get(`${this.baseUrl}getSubscriptions.php?userId=${userId}`);
+  }
+
+  sendSubRequest(): Promise<any> {
+    const userId = this.getCurrentUser().userId;
+    return this.get(`${this.baseUrl}sendSubRequest.php?userId=${userId}`);
+  }
+
+  getSubRequests(): Promise<any> {
+    return this.get(`${this.baseUrl}getSubRequests.php?dummy=1`);
+  }
+
   get(url): Promise<any> {
       url += `&sid=${localStorage.getItem('sessionId')}`;
       return this.http.get(url).toPromise();
