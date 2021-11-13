@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TenderService } from '../tender.service';
 import {Router, ActivatedRoute, Params} from "@angular/router"
 
@@ -37,6 +37,13 @@ export class LoginComponent implements OnInit {
         this.tenderService.setUser(response);
         this.router.navigate(['/home'])
       }
+    }
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    if(event.key == 'Enter') {
+      this.login();
     }
   }
 

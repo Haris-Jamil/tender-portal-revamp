@@ -18,9 +18,11 @@ import { RegisterComponent } from './register/register.component';
 import { AppliedFilterComponent } from './applied-filter/applied-filter.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UserManagerComponent } from './user-manager/user-manager.component';
+import { LandingComponent } from './landing/landing.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'login/:message', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -43,7 +45,9 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     AppliedFilterComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    LandingComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

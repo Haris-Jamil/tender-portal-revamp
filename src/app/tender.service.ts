@@ -101,8 +101,12 @@ export class TenderService {
     return this.get(`${this.baseUrl}sendSubRequest.php?userId=${userId}`);
   }
 
-  getSubRequests(): Promise<any> {
-    return this.get(`${this.baseUrl}getSubRequests.php?dummy=1`);
+  getSubRequests(page: number): Promise<any> {
+    return this.get(`${this.baseUrl}getSubRequests.php?page=${page}`);
+  }
+
+  updateStatus(id, status): Promise<any> {
+    return this.get(`${this.baseUrl}updateStatus.php?id=${id}&status=${status}`);
   }
 
   get(url): Promise<any> {

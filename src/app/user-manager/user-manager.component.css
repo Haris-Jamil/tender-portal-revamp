@@ -56,3 +56,18 @@
 .icon-delete:hover {
     color: #e74c3c;
 }
+
+.status-empty {
+    border: 1px solid #0984e3;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.status-full {
+    border: 1px solid #0984e3;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #74b9ff;
+}

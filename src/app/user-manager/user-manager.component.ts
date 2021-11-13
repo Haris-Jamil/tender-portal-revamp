@@ -12,7 +12,7 @@ export class UserManagerComponent implements OnInit {
   users: any[];
   filteredUsers: any[];
   subs: any[];
-  subRequests: any[];
+  subRequests: any[] = [];
   selectedUser: any;
   faExclamationCircle = faExclamationCircle;
   faTrashAlt = faTrashAlt;
@@ -21,6 +21,8 @@ export class UserManagerComponent implements OnInit {
   startDate: any;
   endDate: any;
   amount: number;
+
+  subReqPage = 1;
 
   constructor(private tenderService: TenderService) { }
 
@@ -62,7 +64,17 @@ export class UserManagerComponent implements OnInit {
   }
 
   async loadSubsRequests(): Promise<void> {
-    this.subRequests = await this.tenderService.getSubRequests();
-}
+    const response = await this.tenderService.getSubRequests(this.subReqPage);
+    this.subRequests = this.subRequests.concat(response);
+    this.subReqPage++;
+  }
+
+  async updateStatus(index, id, status): Promise<void> {
+    const newStatus = status == 1 ? 0 : 1;
+    const response = await this.tenderService.updateStatus(id, newStatus);
+    if (response == 1) {
+      this.subRequests[index].status = newStatus;
+    }
+  }
 
 }

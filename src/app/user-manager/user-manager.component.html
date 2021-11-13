@@ -100,27 +100,37 @@
 
     </div>
 
-    <div class="container-bottom" >
+    <div class="container-bottom" style="margin-bottom:30px" >
       <div class="sectionTitle" >
-        <p>Subscription Requests</p>
+        <p style="margin-bottom: 0px;" >Subscription Requests</p>
       </div>
-      <div class="table-container-bottom" >
+      <div class="table-container-bottom" style="margin-top: 0px;" >
         <table class="table table-hover">
             <thead>
               <tr class="table-primary" >
                 <th scope="col">userId</th>
+                <th scope="col">username</th>
                 <th scope="col">Requested On</th>
                 <th scope="col">status</th>                    
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sr of subRequests">        
+              <tr *ngFor="let sr of subRequests;let i = index">        
                 <td>{{sr.userId}}</td>
+                <td>{{sr.username}}</td>
                 <td>{{sr.request_date}}</td>
-                <td>{{sr.status}}</td>
+                <td>
+                  <div (click)="updateStatus(i, sr.id, sr.status)" [ngClass]="sr.status == 1 ? 'status-full' : 'status-empty' " ></div>
+                </td>
               </tr>      
             </tbody>
         </table>
+        <div style="text-align: center;" >
+            <button class="btn btn-sm btn-primary" (click)="loadSubsRequests()" >
+              Load More
+            </button>
+        </div>
+        
       </div>
     </div>
     

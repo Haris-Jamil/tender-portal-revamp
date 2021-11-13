@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { TenderService } from '../tender.service';
 
@@ -52,6 +52,13 @@ export class RegisterComponent implements OnInit {
       } else {
         this.errorMsg = 'some error occured'
       }
+    }
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    if(event.key == 'Enter') {
+      this.register();
     }
   }
 
