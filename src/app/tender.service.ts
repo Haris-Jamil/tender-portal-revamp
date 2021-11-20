@@ -115,7 +115,7 @@ export class TenderService {
   }
 
   post(url, data): Promise<any> {
-    data['sid'] = localStorage.getItem('sessionId');
+    data.append('sid', localStorage.getItem('sessionId'));
     return this.http.post(url, data).toPromise();
   } 
 

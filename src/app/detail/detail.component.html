@@ -2,8 +2,7 @@
    
     
     <div class="leftContainer" >
-        <h2 class="tenderCode" ><b>{{tender.code}}</b></h2>
-        <hr>
+        <h2 class="tenderCode" ><b>{{tender.code}}</b></h2>        
         <table class="table table-borderless" >
             <tr>
                 <td><b>Published On</b></td>
@@ -35,6 +34,7 @@
         <h1>{{tender.title ? tender.title : 'NA'}}</h1>        
         <hr>
         <span>Status: <span class="status {{status}}" >{{status}}</span></span><br>
+        <span><b>Category:</b> {{tender.category ? tender.category : 'NA'}}</span><br>
         <span><b>Amount:</b> {{tender.amount ? tender.amount : 'NA'}}</span><br>
         <span><b>Bid Security:</b> {{tender.bidSecurity ? tender.bidSecurity : 'NA'}}</span><br>
         <span><b>Method:</b> {{tender.method ? tender.method : 'NA'}}</span><br>

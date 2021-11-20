@@ -3,7 +3,8 @@
         <span class="tenderNumber" *ngIf="!blurMode" >{{tender.tenderNo}}</span>
         <span class="tenderNumber blur" *ngIf="blurMode" >Dummy tender #</span>
         <p class="details" >{{tender.title}}</p>
-        <span class="location" >Location: {{tender.location}}</span>
+        <span class="location" >Location: {{tender.location}}</span><br>
+        <span class="location" >Category: {{tender.category ? tender.category : 'NA'}}</span>
     </div>
 
     <div class="rightContainer" *ngIf="!blurMode" >

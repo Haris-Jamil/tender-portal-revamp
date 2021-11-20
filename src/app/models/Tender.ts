@@ -18,6 +18,7 @@ export class Tender {
     operator: string;
     quotes: string;
     code: string;
+    category: string;
   
     constructor() {
       this.uploadedDate = null;
@@ -39,5 +40,6 @@ export class Tender {
       this.operator = '';
       this.quotes = '';
       this.code = 'OGDCL';
+      this.category = 'HVAC'
     }
   }

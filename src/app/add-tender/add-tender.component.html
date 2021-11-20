@@ -17,6 +17,12 @@
     <input autocomplete="off" [(ngModel)]="tender.title" name="title" type="text" class="form-control form-control-sm form-input-lg" placeholder="title" >
 </div>
 
+<div class="form-inline form-row" >
+    <select class="form-control form-control-sm form-input-lg" [(ngModel)]="tender.category" >
+        <option *ngFor="let c of categories" value="{{c}}" >{{c}}</option>        
+    </select>
+</div>
+
 <input class="form-control form-control-sm form-input-lg tenderFee" (click)="toggleDisplay('.tenderFeeBox')" placeholder="Tender fee options"/>
 <div class="form-row tenderFeeBox" style="display: none;">
     <label><input type="checkbox" [checked]="checks[0]" class="chk-bx" (change)="checkBoxChange($event)" value="Free" />Free</label>

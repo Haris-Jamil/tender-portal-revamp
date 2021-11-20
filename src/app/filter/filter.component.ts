@@ -8,7 +8,8 @@ interface filter {
   nature: string,
   companies: string,
   closingDate: string,
-  publishedDate: string
+  publishedDate: string,
+  categories: string
 }
 
 @Component({
@@ -29,7 +30,8 @@ export class FilterComponent implements OnInit {
     nature: '',
     companies: '',
     closingDate: '',
-    publishedDate: ''
+    publishedDate: '',
+    categories: ''
   }
 
   constructor() { }

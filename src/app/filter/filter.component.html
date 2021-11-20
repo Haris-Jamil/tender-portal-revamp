@@ -23,6 +23,24 @@
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Category</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection">
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="HVAC" /> HVAC</label><br/>                           
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="MEP" /> MEP</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Plumbing" /> Plumbing</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Electrical Works" /> Electrical Works</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Construction" /> Construction</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Consultancy Services" /> Consultancy Services</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Mechanical Parts" /> Mechanical Parts</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Electrical Parts" /> Electrical Parts</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="IT Equipment" /> IT Equipment</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="IT Sector" /> IT Sector</label><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="Power Equipment" /> Power Equipment</label>
+</div>
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
     <span>Company</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
