@@ -88,6 +88,9 @@ export class HomeComponent implements OnInit {
       if (response && response.message == 'trial expired') {
         await this.tenderService.logout()
         this.router.navigate(['/login', 'trial period expired, Please login again to continue']);
+      } else if (response && response.message == 'subscription expired') {
+        await this.tenderService.logout()
+        this.router.navigate(['/login', 'subscription expired, Please login again to continue']);
       } else {
         this.tenders = response;
       }

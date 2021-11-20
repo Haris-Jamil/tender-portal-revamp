@@ -11,7 +11,7 @@ export class UserManagerComponent implements OnInit {
 
   users: any[];
   filteredUsers: any[];
-  subs: any[];
+  subs: any[] = [];
   subRequests: any[] = [];
   selectedUser: any;
   faExclamationCircle = faExclamationCircle;
