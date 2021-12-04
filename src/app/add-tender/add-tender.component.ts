@@ -25,7 +25,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
   btnState = 'btn-primary'
 
   categories = ['HVAC', 'MEP', 'Plumbing', 'Electrical Works', 'Construction', 'Consultancy Services', 'Mechanical Parts',
-   'Electrical Parts', 'IT Equipment', 'IT Sector', 'Power Equipment'];
+   'Electrical Parts', 'IT Equipment', 'IT Sector', 'Power Equipment', 'Logistics', 'Transportation', 'Chemicals', 'Services', 'Others'];
 
 
   constructor(private tenderService: TenderService) { }
