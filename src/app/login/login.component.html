@@ -6,9 +6,10 @@
             <h4>Login</h4>
         </div>
         <input class="form-control" [(ngModel)]="username"  type="text" placeholder="username" />
-        <input class="form-control" [(ngModel)]="password" type="password" placeholder="password" />
-        <span class="errorMsg" *ngIf="errorMsg" >{{errorMsg}}</span>
+        <input class="form-control" [(ngModel)]="password" type="password" placeholder="password" />        
         <button class="btn btn-primary btn-sm loginBtn" (click)="login()" >login</button>
+        <p class="errorMsg" *ngIf="errorMsg" >{{errorMsg}}</p>
+        <p class="registerLink" >haven't registered yet? <a routerLink="/register">Register now</a></p>
     </div>
 
 </div>

@@ -22,6 +22,9 @@ export class RegisterComponent implements OnInit {
   constructor(private tenderService: TenderService, private router: Router) { }
 
   ngOnInit(): void {
+    document.querySelector('html').style.height = '';
+    document.querySelector('body').style.height = '';
+    (document.querySelector('div.footer') as any).style.position = 'absolute';
     const user = localStorage.getItem('user');
     if (user) {
       this.router.navigate(['/home']);

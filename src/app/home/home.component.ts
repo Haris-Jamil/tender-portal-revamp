@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.querySelector('html').style.height = '';
+    document.querySelector('body').style.height = '';
+    (document.querySelector('div.footer') as any).style.position = 'absolute';
     let user = localStorage.getItem('user');
     if (!user) {
       this.router.navigate(['/login']);

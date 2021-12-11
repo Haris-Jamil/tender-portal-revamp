@@ -1,0 +1,15 @@
+.bg {
+    background-image: url("/assets/images/mountain2.jpg");
+    height: 100%;  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.features {
+    height: 100px;
+}
+
+h1 {
+    color: #f5f6fa;
+}

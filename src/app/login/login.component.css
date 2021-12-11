@@ -8,10 +8,10 @@
 
 .loginHeader {
     text-align: center;
+    color: #f5f6fa;
 }
 
 .formContainer {
-    border: 1px solid #bdc3c7;
     padding: 20px;
     border-radius: 20px;
 }
@@ -30,6 +30,19 @@ input, .loginBtn {
 }
 
 .errorMsg {
-    color: #d63031;
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 5px;
     font-size: 13px;
+    margin-top: 10px;
+}
+
+.registerLink {
+    color: #f5f6fa;
+    font-weight: bold;
+}
+
+.registerLink a{
+    color: #f5f6fa;
 }

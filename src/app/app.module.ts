@@ -22,9 +22,9 @@ import { LandingComponent } from './landing/landing.component';
 import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
-  { path: '', component: LandingComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'login/:message', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LandingComponent },
+  { path: 'login/:message', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'detail/:id', component: DetailComponent },
