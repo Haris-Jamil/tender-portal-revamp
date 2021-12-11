@@ -11,11 +11,12 @@
 
 .logoContainer {
     flex: 5;
+    display: flex;
 }
 
 .logo {
     color: #f5f6fa;
-    margin-left: 20px;
+    margin-left: 10px;
     cursor: pointer;
 }
 
@@ -59,4 +60,10 @@
 
 .my-btn {
     margin-right: 10px;
+}
+
+#img-logo {
+    width: 30px;
+    height: 34px;
+    margin-left: 20px;
 }
