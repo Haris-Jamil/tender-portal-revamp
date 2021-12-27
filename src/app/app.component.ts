@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-// import { Tender } from './models/Tender';
-// import { TenderService } from './tender.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(public router: Router) {
+
+  }
 
 }

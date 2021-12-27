@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { CATEGORIES } from '../models/models';
 
 interface filter {
   title: string,
@@ -21,6 +22,7 @@ export class FilterComponent implements OnInit {
 
   faCaretDown = faCaretDown;
   companies: string = '';
+  categories: string[] = CATEGORIES;
   @Output() emitFilter: EventEmitter<any> = new EventEmitter();
 
   filterObj: filter = {

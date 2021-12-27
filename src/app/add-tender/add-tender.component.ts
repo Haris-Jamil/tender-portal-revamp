@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { Tender } from '../models/Tender';
-import { COMPANIES } from '../models/models';
+import { COMPANIES, CATEGORIES } from '../models/models';
 import { TenderService } from '../tender.service';
 
 @Component({
@@ -24,8 +24,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
   btnText = 'save tender'
   btnState = 'btn-primary'
 
-  categories = ['HVAC', 'MEP', 'Plumbing', 'Electrical Works', 'Construction', 'Consultancy Services', 'Mechanical Parts',
-   'Electrical Parts', 'IT Equipment', 'IT Sector', 'Power Equipment', 'Logistics', 'Transportation', 'Chemicals', 'Services', 'Others'];
+  categories: string[] = CATEGORIES; 
 
 
   constructor(private tenderService: TenderService) { }
