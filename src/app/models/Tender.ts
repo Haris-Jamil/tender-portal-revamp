@@ -40,6 +40,6 @@ export class Tender {
       this.operator = '';
       this.quotes = '';
       this.code = 'OGDCL';
-      this.category = 'HVAC'
+      this.category = ''
     }
   }

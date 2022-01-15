@@ -20,6 +20,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { LandingComponent } from './landing/landing.component';
 import { FooterComponent } from './footer/footer.component';
+import { MultiSelectDropdownModule } from './multi-select-dropdown/multi-select-dropdown.module';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
       appRoutes,
       {onSameUrlNavigation: 'reload'}
     ),
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    MultiSelectDropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent],  

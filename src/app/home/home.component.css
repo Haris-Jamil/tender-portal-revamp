@@ -73,7 +73,7 @@
     padding: 20px 10px;
 }
 
-#filters {
-    height: 500px;
+#filters, #addTender, #editTender {
+    height: 550px;
     overflow-y: auto;
 }

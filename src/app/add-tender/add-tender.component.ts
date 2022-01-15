@@ -33,6 +33,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {   
     if (changes.editTender && changes.editTender.currentValue) {
       this.tender = {...changes.editTender.currentValue};
+      this.tender.category = this.tender.category.replace('Consultancy Services', 'Consultancy');
       this.mode = 'edit';
     } else {
       this.tender = new Tender();
@@ -41,6 +42,10 @@ export class AddTenderComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+  }
+
+  categoryChange(categories: string[]): void {
+    this.tender.category = categories.join(', ');
   }
 
   handleFileInput(files: FileList, number){
