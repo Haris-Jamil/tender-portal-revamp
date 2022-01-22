@@ -1,5 +1,9 @@
 <div id="multiSelect" >
-    <span *ngFor="let opt of options" style="display: block;" >   
-        <input type="checkbox" (click)="toggleCheckbox(opt)" class="" [checked]="isChecked(opt.key)" /> {{opt.key}} 
-    </span>
+    <input class="form-control form-control-sm form-input-lg categories" (click)="toggleDisplay($event)" placeholder="Select Categories"/>
+    <div class="form-row catBox" style="display: none;">
+        <span *ngFor="let opt of options" style="display: block;" >   
+            <input type="checkbox" (click)="toggleCheckbox(opt)" class="chk-bx" [checked]="isChecked(opt.key)" /> {{opt.key}} 
+        </span>
+    </div>
+    
 </div>

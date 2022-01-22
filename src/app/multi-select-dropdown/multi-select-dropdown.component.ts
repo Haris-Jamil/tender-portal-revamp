@@ -26,6 +26,14 @@ export class MultiSelectDropdownComponent implements OnInit, OnChanges {
     }    
   }
 
+  toggleDisplay(event) {
+    const ele = event.target.nextSibling;
+    if (ele) {
+      ele.style.display = ele.style.display === '' ? 'none' : '';
+    }
+    
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
       if (!changes.selectedOptions.isFirstChange()) {
         this.options = this.options.map( (option) => { 

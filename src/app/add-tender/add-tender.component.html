@@ -24,7 +24,7 @@
     <app-multi-select-dropdown (selectionChanged)="categoryChange($event)" [options]="categories" [selectedOptions]="tender.category" ></app-multi-select-dropdown>
 </div>
 
-<input class="form-control form-control-sm form-input-lg tenderFee" (click)="toggleDisplay('.tenderFeeBox')" placeholder="Tender fee options"/>
+<input class="form-control form-control-sm form-input-lg tenderFee" (click)="toggleDisplay($event)" placeholder="Tender fee options"/>
 <div class="form-row tenderFeeBox" style="display: none;">
     <label><input type="checkbox" [checked]="checks[0]" class="chk-bx" (change)="checkBoxChange($event)" value="Free" />Free</label>
     <label><input type="checkbox" [checked]="checks[1]" class="chk-bx" (change)="checkBoxChange($event)" value="By Cash" />By Cash</label>

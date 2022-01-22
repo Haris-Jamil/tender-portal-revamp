@@ -118,12 +118,11 @@ export class AddTenderComponent implements OnInit, OnChanges {
     this.loading = false;
   }
 
-  toggleDisplay(eleSelector) {
-    const ele = document.querySelector(eleSelector);
+  toggleDisplay(event) {
+    const ele = event.target.nextSibling;
     if (ele) {
       ele.style.display = ele.style.display === '' ? 'none' : '';
     }
-    
   }
 
   truncateString(text): string {
