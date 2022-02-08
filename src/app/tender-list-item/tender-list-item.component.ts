@@ -27,10 +27,14 @@ export class TenderListItemComponent implements OnInit {
       const year = parseInt(dateParts[2]);
       const closingDate = new Date(year, month-1, day);
 
+      const currentDate7Days = new Date(new Date().setDate(new Date().getDate() - 7 ));
       const currentDate = new Date();
 
-      if (closingDate < currentDate) {
+      if (closingDate < currentDate7Days) {
         this.status = "closed";
+      }
+      if (closingDate > currentDate7Days && closingDate < currentDate) {
+        this.status = "closed (under 7 days)";
       } else {
         this.status = "open"
       }
