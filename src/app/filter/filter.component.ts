@@ -10,7 +10,8 @@ interface filter {
   companies: string,
   closingDate: string,
   publishedDate: string,
-  categories: string
+  categories: string,
+  uploadDate: string
 }
 
 @Component({
@@ -33,7 +34,8 @@ export class FilterComponent implements OnInit {
     companies: '',
     closingDate: '',
     publishedDate: '',
-    categories: ''
+    categories: '',
+    uploadDate: ''
   }
 
   constructor() { }

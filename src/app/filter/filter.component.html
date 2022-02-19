@@ -75,6 +75,14 @@
 </div>
 <div class="filterSection border-bottom" style="padding-right:15px">
     <input type="date" class="form-control" name="closingDate" (change)="changeDate($event, 'closingDate')" >
-</div> 
+</div>
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Upload Date</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>
+<div class="filterSection border-bottom" style="padding-right:15px">
+    <input type="date" class="form-control" name="uploadDate" (change)="changeDate($event, 'uploadDate')" >
+</div>
 
 <button class="btn btn-primary filterBtn btn-sm" (click)="applyFilter()" >Apply Filter</button>

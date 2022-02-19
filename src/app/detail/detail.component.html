@@ -5,6 +5,10 @@
         <h2 class="tenderCode" ><b>{{tender.code}}</b></h2>        
         <table class="table table-borderless" >
             <tr>
+                <td><b>Uploaded On</b></td>
+                <td>{{tender.uploadedDate ? tender.uploadedDate : 'NA'}}</td>
+            </tr>
+            <tr>
                 <td><b>Published On</b></td>
                 <td>{{tender.publishedDate ? tender.publishedDate : 'NA'}}</td>
             </tr>

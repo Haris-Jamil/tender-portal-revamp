@@ -39,6 +39,7 @@
 
     <div class="listingContainer" >
         <div [ngClass]="loading ? 'hidden' : '' " >
+            <app-applied-filter [filterObj]="filter" ></app-applied-filter>
             <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
             <div *ngIf="tenders.length" ><b>page # {{page}}</b></div>  
             <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                

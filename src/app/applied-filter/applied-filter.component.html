@@ -1,1 +1,5 @@
-<p>applied-filter works!</p>
+<div *ngIf="filters.length">
+    <strong style="margin-right:10px" >Applied Filters:</strong>
+    <span class="pill" *ngFor="let filter of filters" >{{filter | titlecase}}</span>
+    <hr>
+</div>
