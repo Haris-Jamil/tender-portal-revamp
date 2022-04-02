@@ -41,7 +41,13 @@
         <div [ngClass]="loading ? 'hidden' : '' " >
             <app-applied-filter [filterObj]="filter" ></app-applied-filter>
             <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
-            <div *ngIf="tenders.length" ><b>page # {{page}}</b></div>  
+            <div *ngIf="tenders.length" >
+                <span><b>page # {{page}}</b></span>
+                <span style="float: right;" >
+                    <button (click)="changeMode('c')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-primary' : 'btn-secondary' " >Current</button>
+                    <button (click)="changeMode('a')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-secondary' : 'btn-primary' ">Archive</button>
+                </span>
+            </div>
             <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
             <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
             <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >

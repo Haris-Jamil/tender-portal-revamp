@@ -15,9 +15,14 @@ export class AppliedFilterComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.filterObj.currentValue) {
-      this.filters = Object.keys(this.filterObj).map( (key) => {
-        return `${key}: ${this.filterObj[key]}`
-      });      
+      this.filters = Object.keys(this.filterObj)
+        .filter( (key) => {
+          return key !== 'mode'
+        })
+        .map( (key) => {
+          return `${key}: ${this.filterObj[key]}`
+        });
+      delete this.filters['mode'];      
     }
   }
 
