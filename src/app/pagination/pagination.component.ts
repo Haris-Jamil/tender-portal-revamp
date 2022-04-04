@@ -24,6 +24,11 @@ export class PaginationComponent implements OnInit {
     }    
   }
 
+  reset(): void {
+    this.page = 1;
+    this.selectPage(null, this.page, document.querySelector('.paginationItem:nth-child(2)'));
+  }
+
   nextBatch(): void {
     this.page += 5;
     this.selectPage(null, this.page, document.querySelector('.paginationItem:nth-child(2)'));

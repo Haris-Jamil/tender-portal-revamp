@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tender } from '../models/Tender';
 import { TenderService } from '../tender.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js'; 
+import { PaginationComponent } from '../pagination/pagination.component';
 
 declare const bootstrap;
 
@@ -27,6 +28,10 @@ export class HomeComponent implements OnInit {
   requestFailedSwalVisible = false;
   trialUser = false;
   trialTaken = false;
+  mode: 'c' | 'a' = 'c';
+
+  @ViewChild(PaginationComponent)
+  pagination: PaginationComponent;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -86,6 +91,7 @@ export class HomeComponent implements OnInit {
 
   async loadTenders(page): Promise<void> {
       this.loading = true;
+      this.filter['mode'] = this.mode;      
       const response = await this.tenderService.getTenders(page,  this.filter);
       if (response && response.message == 'trial expired') {
         await this.tenderService.logout()
@@ -124,6 +130,7 @@ export class HomeComponent implements OnInit {
   applyFilter(filter): void {
     this.filter = filter;
     this.page = 1;
+    this.pagination.reset();
     this.loadTenders(this.page);
   }
 
@@ -164,6 +171,13 @@ export class HomeComponent implements OnInit {
         this.subscribeSwalVisible = false;
         this.requestFailedSwalVisible = true;
       }
+  }
+
+  changeMode(mode: 'c' | 'a'): void {
+    this.mode = mode;
+    this.page = 1;
+    this.pagination.reset();
+    this.loadTenders(this.page);  
   }
  
 }
