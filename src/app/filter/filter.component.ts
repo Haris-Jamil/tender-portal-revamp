@@ -2,16 +2,19 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { CATEGORIES } from '../models/models';
 
-interface filter {
+interface Filter {
   title: string,
   tenderNo: string,
   location: string,
   nature: string,
   companies: string,
   closingDate: string,
+  closingDateEnd: string,
   publishedDate: string,
+  publishedDateEnd: string,
   categories: string,
-  uploadDate: string
+  uploadDate: string,
+  nilBid: boolean
 }
 
 @Component({
@@ -26,16 +29,19 @@ export class FilterComponent implements OnInit {
   categories: string[] = CATEGORIES;
   @Output() emitFilter: EventEmitter<any> = new EventEmitter();
 
-  filterObj: filter = {
+  filterObj: Filter = {
     title: '',
     tenderNo: '',
     location: '',
     nature: '',
     companies: '',
     closingDate: '',
+    closingDateEnd: '',
     publishedDate: '',
+    publishedDateEnd: '',
     categories: '',
-    uploadDate: ''
+    uploadDate: '',
+    nilBid: false
   }
 
   constructor() { }
@@ -67,12 +73,16 @@ export class FilterComponent implements OnInit {
   }
 
   setCheckbox(event, filter) {
-    const val = event.target.value;
-    if (this.filterObj[filter].includes(val)) {
-      this.filterObj[filter] = this.filterObj[filter].replace(`${val},`, '');
+    if (filter === 'nilBid') {
+      this.filterObj.nilBid = event.target.checked;
     } else {
-      this.filterObj[filter] += `${val},`;
-    }
+      const val = event.target.value;
+      if (this.filterObj[filter].includes(val)) {
+        this.filterObj[filter] = this.filterObj[filter].replace(`${val},`, '');
+      } else {
+        this.filterObj[filter] += `${val},`;
+      }
+    }    
   }
 
   changeDate(event, filter) {
@@ -82,6 +92,10 @@ export class FilterComponent implements OnInit {
           date = [ parts[2], parts[1], parts[0] ].join('-');
       }
       this.filterObj[filter] = date;
+      if (!date) {
+        (document.querySelector(`input[name=${filter + 'End'}]`)as any).value = '';
+        this.filterObj[filter + 'End'] = date;
+      }
   }
 
 }

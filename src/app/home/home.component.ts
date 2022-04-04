@@ -130,7 +130,9 @@ export class HomeComponent implements OnInit {
   applyFilter(filter): void {
     this.filter = filter;
     this.page = 1;
-    this.pagination.reset();
+    if (this.pagination) {
+      this.pagination.reset();
+    }
     this.loadTenders(this.page);
   }
 
@@ -176,7 +178,9 @@ export class HomeComponent implements OnInit {
   changeMode(mode: 'c' | 'a'): void {
     this.mode = mode;
     this.page = 1;
-    this.pagination.reset();
+    if (this.pagination) {
+      this.pagination.reset();
+    }
     this.loadTenders(this.page);  
   }
  

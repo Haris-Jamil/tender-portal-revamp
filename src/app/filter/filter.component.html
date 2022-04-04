@@ -61,11 +61,22 @@
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
+    <span>Bid Security</span>
+    <fa-icon [icon]="faCaretDown"></fa-icon>
+</div>   
+<div class="filterSection">
+    <label><input type="checkbox" (click)="setCheckbox($event, 'nilBid')" /> Nil Bids</label><br/>      
+</div>
+
+<div class="filterTitle" (click)="toggleFilterSection($event)">
     <span>Published Date</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection" style="padding-right:15px" >
+    <span>Start Date:</span>
     <input type="date" class="form-control" name="publishedDate" (change)="changeDate($event, 'publishedDate')" >
+    <span>End Date:</span>
+    <input style="margin-top:5px" [disabled]="!filterObj.publishedDate" type="date" class="form-control" name="publishedDateEnd" (change)="changeDate($event, 'publishedDateEnd')" >
 </div> 
 
 
@@ -74,7 +85,10 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection border-bottom" style="padding-right:15px">
+    <span>Start Date:</span>
     <input type="date" class="form-control" name="closingDate" (change)="changeDate($event, 'closingDate')" >
+    <span>End Date:</span>
+    <input style="margin-top:5px" [disabled]="!filterObj.closingDate" type="date" class="form-control" name="closingDateEnd" (change)="changeDate($event, 'closingDateEnd')" >
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
