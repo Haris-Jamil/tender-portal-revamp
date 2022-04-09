@@ -37,17 +37,18 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="OGDCL" /> OGDCL</label><br/>                           
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PAKRAIL" /> PAKRAIL</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PARCO" /> PARCO</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PAK" /> PPRA-PAK</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PUN" /> PPRA-PUN</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PSO" /> PSO</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="POF" /> POF</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="SNGPL" /> SNGPL</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PIA" /> PIA</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPL" /> PPL</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="MISCELLANEOUS" /> MISCELLANEOUS</label>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="OGDCL" /> OGDCL </label><span class="count">{{getCount('OGDCL')}}</span><br/>                           
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PAKRAIL" /> PAKRAIL </label><span class="count">{{getCount('PAKRAIL')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PARCO" /> PARCO </label><span class="count">{{getCount('PARCO')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PAK" /> PPRA-PAK </label><span class="count">{{getCount('PPRA-PAK')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PUN" /> PPRA-PUN </label><span class="count">{{getCount('PPRA-PUN')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PSO" /> PSO </label><span class="count">{{getCount('PSO')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="POF" /> POF </label><span class="count">{{getCount('POF')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="SNGPL" /> SNGPL </label><span class="count">{{getCount('SNGPL')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PIA" /> PIA </label><span class="count">{{getCount('PIA')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPL" /> PPL </label><span class="count">{{getCount('PPL')}}</span><br/>
+    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="MISCELLANEOUS" /> MISCELLANEOUS </label><span class="count"> {{getCount('MISCELLANEOUS')}}</span>
+    <input style="width:250px" [(ngModel)]="companyText" type="text" class="form-control form-control-sm" placeholder="company.." >
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">

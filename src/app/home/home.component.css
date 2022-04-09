@@ -81,3 +81,9 @@
 .btn-toggle {
     border-radius: 0px;
 }
+
+.count {
+    margin-right: 20px;
+    color: #57606f;
+    font-weight: bold;
+}

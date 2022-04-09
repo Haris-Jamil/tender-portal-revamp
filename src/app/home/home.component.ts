@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit {
   trialUser = false;
   trialTaken = false;
   mode: 'c' | 'a' = 'c';
+  closedBids: number = 0;
+  openBids: number = 0;
 
   @ViewChild(PaginationComponent)
   pagination: PaginationComponent;
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
     document.querySelector('html').style.height = '';
     document.querySelector('body').style.height = '';
     let user = localStorage.getItem('user');
+    this.setCounts();
     if (!user) {
       this.router.navigate(['/login']);
     } else {
@@ -59,6 +62,12 @@ export class HomeComponent implements OnInit {
     this.tenderService.authEvent.subscribe( (user) => {
         this.handleUser(user);
     });    
+  }
+
+  async setCounts(): Promise<void>{
+    const counts = await this.tenderService.getTenderCounts();
+    this.closedBids = counts[counts.length - 1 ].closedBids;
+    this.openBids =  counts[counts.length - 2 ].openBids;
   }
 
   handleUser(user): void {

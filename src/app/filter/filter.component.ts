@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { CATEGORIES } from '../models/models';
+import { TenderService } from '../tender.service';
 
 interface Filter {
   title: string,
@@ -27,6 +28,8 @@ export class FilterComponent implements OnInit {
   faCaretDown = faCaretDown;
   companies: string = '';
   categories: string[] = CATEGORIES;
+  companyText: string = '';
+  counts = [];
   @Output() emitFilter: EventEmitter<any> = new EventEmitter();
 
   filterObj: Filter = {
@@ -44,9 +47,20 @@ export class FilterComponent implements OnInit {
     nilBid: false
   }
 
-  constructor() { }
+  constructor(private tenderService: TenderService) { }
 
   ngOnInit(): void {
+    this.setCounts();
+  }
+
+  async setCounts(): Promise<void>{
+    this.counts = await this.tenderService.getTenderCounts();
+  }
+
+  getCount(title): string {
+    if (!this.counts.length) { return '0'; }
+    const company: {count, code} = this.counts.filter( x => x.code == title )[0];
+    return `(${company ? company.count : '0'})`
   }
 
   applyFilter(): void {
@@ -55,6 +69,10 @@ export class FilterComponent implements OnInit {
       if (this.filterObj[key]) {
         appliedFilters[key] = this.filterObj[key];
       }
+    }
+    if (this.companyText) {
+      appliedFilters['companies'] = appliedFilters['companies'] ? appliedFilters['companies'] : ''
+      appliedFilters['companies'] += `${this.companyText},`
     }
     this.emitFilter.next(appliedFilters);
   }

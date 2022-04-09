@@ -109,6 +109,10 @@ export class TenderService {
     return this.get(`${this.baseUrl}updateStatus.php?id=${id}&status=${status}`);
   }
 
+  getTenderCounts(): Promise<any> {
+    return this.get(`${this.baseUrl}getTenderCounts.php?dummy=1`)
+  }
+
   get(url): Promise<any> {
       url += `&sid=${localStorage.getItem('sessionId')}`;
       return this.http.get(url).toPromise();

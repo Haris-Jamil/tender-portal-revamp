@@ -42,6 +42,12 @@
     width: 100%;
 }
 
+.count {
+    float: right;
+    margin-right: 20px;
+    color: #57606f;
+}
+
 /* .form-block {
     padding: 5px 3px 5px 3px;
     background-color: #f5f6fa;
