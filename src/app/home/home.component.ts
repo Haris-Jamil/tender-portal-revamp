@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   mode: 'c' | 'a' = 'c';
   closedBids: number = 0;
   openBids: number = 0;
+  footer: any;
 
   @ViewChild(PaginationComponent)
   pagination: PaginationComponent;
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     document.querySelector('html').style.height = '';
     document.querySelector('body').style.height = '';
+    this.footer = document.querySelector('div.footer');
     let user = localStorage.getItem('user');
     this.setCounts();
     if (!user) {
@@ -100,6 +102,7 @@ export class HomeComponent implements OnInit {
 
   async loadTenders(page): Promise<void> {
       this.loading = true;
+      this.footer.style.display = 'none';
       this.filter['mode'] = this.mode;      
       const response = await this.tenderService.getTenders(page,  this.filter);
       if (response && response.message == 'trial expired') {
@@ -112,6 +115,7 @@ export class HomeComponent implements OnInit {
         this.tenders = response;
       }
       this.loading = false;
+      this.footer.style.display = '';
   }
 
   openTab(): void {

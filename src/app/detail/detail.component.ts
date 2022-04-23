@@ -39,6 +39,7 @@ export class DetailComponent implements OnInit {
       const closingDate = new Date(year, month-1, day);
 
       const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
 
       if (closingDate < currentDate) {
         this.status = "closed";
