@@ -141,5 +141,13 @@ export class AddTenderComponent implements OnInit, OnChanges {
     }
     return text;
   }
+
+  updateDate(event, key): void {
+    const dateText = event.target.value;
+    const numLength = dateText.match(/\d/g).length;
+    if ((numLength === 2 || numLength === 4) && dateText[dateText.length - 1] != "-") {
+      this.tender[key] = dateText + "-"
+    }
+  } 
   
 }

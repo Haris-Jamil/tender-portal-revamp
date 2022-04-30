@@ -7,7 +7,7 @@
 </div>
 
 <div class="form-inline form-row">
-    <input autocomplete="off" [(ngModel)]="tender.uploadedDate" name="uploadedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Uploaded Date" >
+    <input autocomplete="off" (keyup)="updateDate($event, 'uploadedDate')" [(ngModel)]="tender.uploadedDate" name="uploadedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Uploaded Date" >
 </div>
 
 <div class="form-inline form-row">
@@ -41,17 +41,17 @@
 </div>
 
 <div class="form-inline form-row">
-    <input autocomplete="off" [(ngModel)]="tender.publishedDate" name="publishedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Published Date" >
+    <input autocomplete="off" (keyup)="updateDate($event, 'publishedDate')" [(ngModel)]="tender.publishedDate" name="publishedDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Published Date" >
 </div>
 
 <ng-container *ngIf="code == 'PAKRAIL' || code == 'PARCO' ">
     <div class="form-inline form-row">
-    <input autocomplete="off" [(ngModel)]="tender.docDeadline" name="docDeadline" type="text" class="form-control form-control-sm form-input-lg" placeholder="Document Deadline" >
+    <input autocomplete="off" (keyup)="updateDate($event, 'docDeadline')" [(ngModel)]="tender.docDeadline" name="docDeadline" type="text" class="form-control form-control-sm form-input-lg" placeholder="Document Deadline" >
     </div>
 </ng-container>          
 
 <div class="form-inline form-row">
-    <input autocomplete="off" [(ngModel)]="tender.closingDate" name="closingDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Closing Date" >
+    <input autocomplete="off" (keyup)="updateDate($event, 'closingDate')" [(ngModel)]="tender.closingDate" name="closingDate" type="text" class="form-control form-control-sm form-input-lg" placeholder="Closing Date" >
 </div>
 
 <div class="form-inline form-row">
