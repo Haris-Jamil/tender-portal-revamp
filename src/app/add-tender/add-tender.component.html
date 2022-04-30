@@ -1,8 +1,9 @@
 <p class="msg" >Please Add all date type field in dd-MM-YYYY format</p>
 <div class="form-inline form-row">
-    <select name="selectedCompany" (change)="companyChange($event)" [(ngModel)]="tender.code" class="form-control form-control-sm form-input-lg">
+    <select name="selectedCompany" (change)="companyChange($event)" [(ngModel)]="tender.code" class="form-control form-control-sm form-input-lg inline">
         <option *ngFor="let c of companies" value="{{c}}" >{{c}}</option>   
     </select>
+    <input autocomplete="off" [(ngModel)]="codeManual" (change)="companyChangeManual($event)" style="margin-left: 5px;" name="selectedCompanyM" type="text" class="form-control form-control-sm form-input-lg inline" placeholder="Type Manually..."  />
 </div>
 
 <div class="form-inline form-row">

@@ -58,3 +58,9 @@ label {
     width: 15px;
     height: 15px;
 }
+
+.inline {
+    width: 49%;
+    display: inline;
+    margin: 0px;
+}

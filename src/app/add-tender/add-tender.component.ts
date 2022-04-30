@@ -23,6 +23,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
   loading = false;
   btnText = 'save tender'
   btnState = 'btn-primary'
+  codeManual: string = '';
 
   categories: string[] = CATEGORIES; 
 
@@ -34,6 +35,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
     if (changes.editTender && changes.editTender.currentValue) {
       this.tender = {...changes.editTender.currentValue};
       this.tender.category = this.tender.category.replace('Consultancy Services', 'Consultancy');
+      this.codeManual = !this.companies.includes(this.tender.code) ? this.tender.code : '';
       this.mode = 'edit';
     } else {
       this.tender = new Tender();
@@ -54,6 +56,13 @@ export class AddTenderComponent implements OnInit, OnChanges {
 
   companyChange(event) {
     this.code = event.target.value;
+    this.codeManual = '';
+  }
+
+  companyChangeManual(event) {
+    this.code = event.target.value;
+    this.codeManual = this.code;
+    this.tender.code = this.code;
   }
 
   checkBoxChange(evn) {
@@ -93,6 +102,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
         this.tender = new Tender();
         this.file1 = null;
         this.file2 = null;
+        this.codeManual = '';
         this.btnText = 'saved';
         this.btnState = 'btn-success disabled'
         this.saved.emit(true);

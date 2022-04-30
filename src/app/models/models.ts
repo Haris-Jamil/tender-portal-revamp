@@ -8,7 +8,8 @@ export const COMPANIES: string[] = [
     'POF',
     'SNGPL',
     'PIA',
-    'PPL'
+    'PPL',
+    'MISCELLANEOUS'
 ];
 
 export const CATEGORIES: string [] = ['HVAC', 'MEP', 'Plumbing', 'Electrical Works', 'Construction', 'Consultancy', 'Mechanical Parts',
