@@ -56,6 +56,22 @@
     color: white;
 }
 
+.inviteBtn {
+    border: 1px solid rgb(138, 136, 136);        
+    width: 60px;
+    border-radius: 2px;
+    padding: 1px 1px;
+    color: rgb(107, 106, 106);
+    margin-right: 5px;
+    font-size: 12px;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in;
+}
+
+.inviteBtn:hover {
+    background-color: #00b894;
+    color: white;
+}
+
 .deleteBtn {
     border: 1px solid rgb(138, 136, 136);        
     width: 60px;

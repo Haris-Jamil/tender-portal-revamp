@@ -69,4 +69,13 @@ export class TenderListItemComponent implements OnInit {
     }
   }
 
+  async sendInvite(event): Promise<any> {
+    const url = window.location.host + `/detail/${this.tender.id}`;
+    await this.tenderService.sendInvitationEmail( encodeURIComponent(url), this.tender.closingDate)
+    event.target.innerText = 'sent';
+    setTimeout( () => {
+      event.target.innerText = 'Invite';
+    }, 2000);
+  }
+
 }

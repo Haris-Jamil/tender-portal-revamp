@@ -34,6 +34,10 @@ export class TenderService {
     return this.get(`${this.baseUrl}getTenders.php?page=${page}${queryStr}`);
   }
 
+  sendInvitationEmail(link, duedate): Promise<any> {
+    return this.get(`${this.baseUrl}sendEmail.php?link=${link}&dueDate=${duedate}`);
+  }
+
   saveTender(data): Promise<any> {
     return this.post(`${this.baseUrl}addTender.php`, data);
   }
