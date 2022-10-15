@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { TenderService } from '../tender.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,12 +8,17 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  openTenderCount: number;
+
+  constructor(private tenderService: TenderService) { }
 
   ngOnInit(): void {
     document.querySelector('html').style.height = '100%';
     document.querySelector('body').style.height = '100%';    
     (document.querySelector('div.footer') as any).style.position = 'inherit';
+    this.tenderService.getTenderCounts().then( (resp) => {
+      this.openTenderCount = resp[10].openBids;
+    });
   }
 
 }
