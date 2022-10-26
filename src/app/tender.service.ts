@@ -26,12 +26,25 @@ export class TenderService {
     localStorage.setItem('sessionId', userData[1]);
   }
 
-  getTenders(page: number, filter): Promise<any> {
+  getTenders(page: number, filter, catFilter): Promise<any> {
     let queryStr = '';
+    if (!filter['categories'] && catFilter) {
+      filter['categories'] = '';
+    }
     for (let k in filter) {
+      if (k === 'categories') {
+        if (!filter[k])
+          filter[k] = '';
+          filter[k] += catFilter;
+      }
       queryStr += `&${k}=${filter[k]}`
     }
     return this.get(`${this.baseUrl}getTenders.php?page=${page}${queryStr}`);
+  }
+
+  getUserCategories(): Promise<any> {
+    const userId = this.getCurrentUser().userId;
+    return this.get(`${this.baseUrl}getUserCategories.php?userId=${userId}`);
   }
 
   sendInvitationEmail(link, duedate): Promise<any> {
@@ -92,8 +105,8 @@ export class TenderService {
     return this.get(`${this.baseUrl}getUsers2.php?dummy=1`);
   }
 
-  addSubscription(startDate, endDate, amount, userId): Promise<any> {
-    return this.get(`${this.baseUrl}addSubscription.php?startDate=${startDate}&endDate=${endDate}&amount=${amount}&userId=${userId}`);
+  addSubscription(startDate, endDate, amount, userId, categories): Promise<any> {
+    return this.get(`${this.baseUrl}addSubscription.php?startDate=${startDate}&endDate=${endDate}&amount=${amount}&userId=${userId}&categories=${categories}`);
   }
 
   getSubscriptions(userId): Promise<any> {
@@ -115,6 +128,35 @@ export class TenderService {
 
   getTenderCounts(): Promise<any> {
     return this.get(`${this.baseUrl}getTenderCounts.php?dummy=1`)
+  }
+
+  editUser(data): Promise<any> {
+    return this.get(`${this.baseUrl}editUser.php?id=${data.id}&username=${data.username}
+    &password=${data.password}&contact=${data.contact}&org=${data.org}&city=${data.city}&email=${data.email}`);
+  }
+
+  deleteUserById(id): Promise<any> {
+    return this.get(`${this.baseUrl}deleteUser2.php?id=${id}`);
+  }
+
+  editCompany(company, status, id): Promise<any> {
+    return this.get(`${this.baseUrl}editCompany.php?company=${company}&status=${status}&id=${id}`);
+  }
+
+  deleteCompany(id): Promise<any> {
+    return this.get(`${this.baseUrl}deleteCompany.php?id=${id}`);
+  }
+
+  deleteSubscription(id): Promise<any> {
+    return this.get(`${this.baseUrl}deleteSub.php?id=${id}`);
+  }
+
+  addCompany(company, status): Promise<any> {
+    return this.get(`${this.baseUrl}addCompany.php?company=${company}&status=${status}`);
+  }
+
+  getCompanies(): Promise<any> {
+    return this.get(`${this.baseUrl}getCompanies.php?dummy=1`);
   }
 
   get(url): Promise<any> {

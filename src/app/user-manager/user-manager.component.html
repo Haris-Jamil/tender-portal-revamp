@@ -1,10 +1,31 @@
-<div class="container" >
-    <input type="text" id="filterUserInp" class="form-control form-inline" placeholder="filter user by username..." (input)="filterUser($event)" />
+<div class="container" style="margin-bottom: 200px;" >
+
+  <div style="margin-top: 50px;height: 25px;" >
+    <button (click)="showTab(0)" [ngClass]="views[0] ? 'tabActive' : ''" class="dashboardTab" >User Manager</button>
+    <button (click)="showTab(1)" [ngClass]="views[1] ? 'tabActive' : ''" class="dashboardTab">Subscription Requests</button>
+    <button (click)="showTab(2)" [ngClass]="views[2] ? 'tabActive' : ''" class="dashboardTab">Vendor Status</button>  
+    <hr style="margin:0px;" >
+  </div>
+  
+
+  <ng-container *ngIf="views[0]" >
+    <div class="form-inline" style="display: inline;" >
+      <input type="text" [(ngModel)]="username" class="form-control form-inline add-form" placeholder="Username" />
+      <input type="text" [(ngModel)]="password" class="form-control form-inline add-form" placeholder="Password" />
+      <input type="text" [(ngModel)]="contactNumber" class="form-control form-inline add-form" placeholder="Phone" />
+      <input type="text" [(ngModel)]="orgName" class="form-control form-inline add-form" placeholder="Organisation" />
+      <input type="text" [(ngModel)]="email" class="form-control form-inline add-form" placeholder="Email" />
+      <input type="text" [(ngModel)]="city" class="form-control form-inline add-form" placeholder="City" />
+      <button (click)="AddEditUser()" class="btn btn-primary" style="margin-bottom:5px;" >{{editMode ? 'Edit User' : 'Add New User'}}</button>
+      <button *ngIf="editMode" (click)="cancelEdit()" class="btn btn-danger" style="margin-bottom:5px;margin-left:5px ;" >Cancel</button>
+    </div>
+    <input type="text" id="filterUserInp" class="form-control form-inline" placeholder="filter user by username..." (input)="filterUser($event)" />      
     <div class="table-container" >
         <table class="table table-hover">
             <thead>
               <tr class="table-primary" >
                 <th scope="col">username</th>
+                <th scope="col" >password</th>
                 <th scope="col">type</th>
                 <th scope="col">trialTaken</th>
                 <th scope="col">trialLastDate</th>
@@ -12,11 +33,13 @@
                 <th scope="col">orgname</th>
                 <th scope="col">email</th>
                 <th scope="col">city</th>
+                <th scope="col">actions</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of filteredUsers" (click)="loadSubscriptions(user.id)" >        
                 <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
                 <td>{{user.type}}</td>
                 <td>{{user.trialTaken == 0 ? 'No' : 'Yes'}}</td>
                 <td>{{user.trialLastDate}}</td>
@@ -24,6 +47,10 @@
                 <td>{{user.orgname}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.city}}</td>
+                <td>
+                  <fa-icon class="icon-delete" (click)="deleteUser(user.id)" [icon]="faTrashAlt"></fa-icon>
+                  <fa-icon class="icon-edit" (click)="editUser(user)" [icon]="faPen"></fa-icon>
+                </td>
               </tr>      
             </tbody>
         </table>
@@ -39,27 +66,60 @@
       </div>
       <div class="user-selected" *ngIf="selectedUser" >
         <p><b>Selected User: </b>{{selectedUser.username}}</p>
+
         <div class="row g-3" >
-          <div class="col-md-3" >
+          <div class="col-md-4" >
             <label>start date:</label>
             <input type="date" [(ngModel)]="startDate" class="form-control form-control-sm" />
           </div>
 
-          <div class="col-md-3" >
+          <div class="col-md-4" >
             <label>end date:</label>
             <input type="date" [(ngModel)]="endDate" class="form-control form-control-sm" />
           </div>
 
-          <div class="col-md-3" >
+          <div class="col-md-4" >
             <label>Amount recieved:</label>
             <input type="number" [(ngModel)]="amount" class="form-control form-control-sm" />
           </div>
+                            
+        </div>
+
+        <div class="row" style="margin-top:10px;" >
+          <div class="col-md-12" >
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="All" /> All </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="HVAC" /> HVAC </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="MEP" /> MEP </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Electrical Works" /> Electrical Works </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Construction" /> Construction </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Consultancy" /> Consultancy </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value=" Mechanical Parts" />  Mechanical Parts </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Electrical Parts" /> Electrical Parts </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="IT Equipment" /> IT Equipment </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="IT Sector" /> IT Sector </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Power Equipment" /> Power Equipment </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Logistics" /> Logistics </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Transportation" /> Transportation </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Chemicals" /> Chemicals </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Services" /> Services </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="General items" /> General items </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Common Materials" /> Common Materials </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Food Items" /> Food Items </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Raw materials" /> Raw materials </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Medical Items" /> Medical Items </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Oil, Gases and Lubricants" /> Oil, Gases and Lubricants </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Textile Material" /> Textile Material </label>
+            <label><input class="chkBox" (click)="setCheckbox($event)" type="checkbox" name="company" value="Others" /> Others </label>
+          </div>
+        </div>
+
+        <div class="row" >
           <div class="col-md-3" >
             <button id="subscribeBtn" class="btn btn-sm btn-primary" (click)="addSubscription()" >
               Add New Subscription
               <fa-icon [icon]="faPlus"></fa-icon>
             </button>
-          </div>                    
+          </div> 
         </div>
 
         <div class="row" >
@@ -81,7 +141,7 @@
                     <td>{{s.endDate}}</td>
                     <td>{{s.amount}}</td>
                     <td>{{s.timestamp}}</td>
-                    <td class="icon-delete" ><fa-icon [icon]="faTrashAlt"></fa-icon></td>                
+                    <td class="icon-delete" ><fa-icon (click)="deleteSubscription(s)" [icon]="faTrashAlt"></fa-icon></td>                
                   </tr>      
                 </tbody>
               </table>
@@ -99,7 +159,9 @@
 
 
     </div>
-
+  </ng-container>
+  
+  <ng-container *ngIf="views[1]">
     <div class="container-bottom" style="margin-bottom:110px" >
       <div class="sectionTitle" >
         <p style="margin-bottom: 0px;" >Subscription Requests</p>
@@ -133,5 +195,52 @@
         
       </div>
     </div>
-    
+  </ng-container>
+
+  <ng-container *ngIf="views[2]" >
+    <div class="container-bottom" style="margin-bottom:110px;padding: 10px;" >
+      <div class="form-inline" style="display: inline;" >
+        <input type="text" [(ngModel)]="company" class="form-control form-inline add-form" placeholder="Company" />
+        <select [(ngModel)]="status" class="form-control form-inline add-form" >
+            <option value="Emailed" >Emailed</option>
+            <option value="Under consideration">Under consideration</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+        <button (click)="AddEditCompany()" class="btn btn-primary" style="margin-bottom:5px;" >{{editModeCompany ? 'Edit Company' : 'Add New Company'}}</button>
+        <button *ngIf="editModeCompany" (click)="cancelEdit(2)" class="btn btn-danger" style="margin-bottom:5px;margin-left:5px ;" >Cancel</button>
+      </div>
+      <input type="text" id="filterUserInp" class="form-control form-inline" placeholder="filter company by name..." (input)="filterCompany($event)" /> 
+      <div class="sectionTitle" >
+        <p style="margin-bottom: 0px;" >Company Status</p>
+      </div>
+      <div class="table-container-bottom" style="margin-top: 0px;" >
+        <table class="table table-hover">
+            <thead>
+              <tr class="table-primary" >
+                <th scope="col" >#</th>
+                <th scope="col">company</th>
+                <th scope="col">status</th>
+                <th scope="col">Action</th>                    
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of filteredCompanies;let i = index">        
+                <td>{{i+1}}</td>
+                <td>{{c.company}}</td>
+                <td>{{c.status}}</td>
+                <td>
+                  <fa-icon class="icon-delete" (click)="deleteCompany(c.id)" [icon]="faTrashAlt"></fa-icon>
+                  <fa-icon class="icon-edit" (click)="editCompany(c)" [icon]="faPen"></fa-icon>
+                </td>
+              </tr>      
+            </tbody>
+        </table>
+        
+      </div>
+    </div>
+  </ng-container>
+
+  
+  
 </div>

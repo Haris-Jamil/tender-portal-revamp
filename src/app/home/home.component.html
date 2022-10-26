@@ -50,7 +50,7 @@
                     <button (click)="changeMode('a')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-secondary' : 'btn-primary' ">Archive</button>                    
                 </span>
             </div>
-            <app-tender-list-item *ngFor="let t of tenders" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
+            <app-tender-list-item *ngFor="let t of tenders" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
             <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
             <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >
                 <hr>
@@ -63,6 +63,21 @@
             </div>
         </div>
         
+    </div>
+
+    <div id="SubExpireModal" class="modal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" (click)="closeModalSubExp()" class="btn-close" ></button>
+            </div>
+            <div class="modal-body" >
+                <h5>Subscription Expiring</h5>
+                <hr id="seprator" >
+                <h3 class="headingLast" >Your subscription is ending on {{getEndDate()}}</h3>
+            </div>
+          </div>
+        </div>
     </div>
 
     <div id="trialModal" class="modal" tabindex="-1" data-bs-backdrop="static">

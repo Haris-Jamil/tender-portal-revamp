@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   showTabs: boolean = false;
   loading: boolean = false;
   trialModal;
+  subExpModal;
   trialSuccessSwalVisible = false;
   subscribeSwalVisible = false;
   requestSendSwalVisible = false;
@@ -32,9 +33,11 @@ export class HomeComponent implements OnInit {
   closedBids: number = 0;
   openBids: number = 0;
   footer: any;
-
+  userCategoryFilter: any;
+  expiryPopupShown: boolean = false
   @ViewChild(PaginationComponent)
   pagination: PaginationComponent;
+  endDate: any[];
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -48,8 +51,7 @@ export class HomeComponent implements OnInit {
     if (!user) {
       this.router.navigate(['/login']);
     } else {
-      this.handleUser(JSON.parse(user));
-      this.loadTenders(this.page);    
+      this.handleUser(JSON.parse(user));      
     }
 
     const modalEl = document.querySelector('#trialModal');
@@ -61,9 +63,21 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    const modal = document.querySelector('#SubExpireModal');
+    this.subExpModal = bootstrap.Modal.getOrCreateInstance(modal, {});
+
     this.tenderService.authEvent.subscribe( (user) => {
         this.handleUser(user);
     });    
+    
+  }
+
+  getEndDate() {
+    if (this.endDate) {
+      return `${this.endDate[2]}/${this.endDate[1]}/${this.endDate[0]}`;
+    } else {
+      return '';
+    }
   }
 
   async setCounts(): Promise<void>{
@@ -72,7 +86,7 @@ export class HomeComponent implements OnInit {
     this.openBids =  counts[counts.length - 2 ].openBids;
   }
 
-  handleUser(user): void {
+  async handleUser(user): Promise<void> {
     if (user) {
       this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
       if (user.type == 1) {
@@ -85,8 +99,33 @@ export class HomeComponent implements OnInit {
       }
       if (user.type  == 2) {
           this.trialUser = true;
-      }      
+      }   
+      const userCategories = await this.tenderService.getUserCategories();
+      if ((userCategories && userCategories.length == 1)) {
+        if (!userCategories[0].categories || userCategories[0].categories.indexOf('All') > -1){
+          this.userCategoryFilter = '';
+        } else {
+          this.userCategoryFilter = '';
+          this.userCategoryFilter = userCategories[0].categories;                
+        }      
+        if (!this.expiryPopupShown && userCategories[0].endDate) {
+          const currentDate = new Date();
+          this.endDate = userCategories[0].endDate.split('-');
+          const date = new Date(userCategories[0].endDate);
+          date.setDate(date.getDate() - 7);
+          if (currentDate > date) {
+            this.subExpModal.show();
+          }
+          this.expiryPopupShown = true;
+        }     
+      }
+      this.loadTenders(this.page); 
     }
+
+    if (user.username === 'admin') {
+      this.loadTenders(this.page); 
+    }
+    
   }
 
   closeModal(): void {
@@ -100,11 +139,28 @@ export class HomeComponent implements OnInit {
     
   }
 
+  closeModalSubExp(): void {
+    this.subExpModal.hide();
+    document.querySelectorAll('.modal-backdrop').forEach( (el) => {
+        el.remove();
+    });
+    if (document.querySelector('.modal-backdrop')) {
+      document.querySelector('.modal-backdrop').remove();
+    }
+    
+  }
+
   async loadTenders(page): Promise<void> {
       this.loading = true;
       this.footer.style.display = 'none';
-      this.filter['mode'] = this.mode;      
-      const response = await this.tenderService.getTenders(page,  this.filter);
+      this.filter['mode'] = this.mode;
+      if (this.userCategoryFilter) {
+        this.userCategoryFilter = this.userCategoryFilter.replace(/@/g, ',');
+        if (this.userCategoryFilter.slice(-1) !== ',') {
+          this.userCategoryFilter += ','
+        }        
+      }
+      const response = await this.tenderService.getTenders(page,  this.filter, this.userCategoryFilter);
       if (response && response.message == 'trial expired') {
         await this.tenderService.logout()
         this.router.navigate(['/login', 'trial period expired, Please login again to continue']);
@@ -145,8 +201,9 @@ export class HomeComponent implements OnInit {
     this.page = 1;
     if (this.pagination) {
       this.pagination.reset();
+    } else {
+      this.loadTenders(this.page);
     }
-    this.loadTenders(this.page);
   }
 
   gotoPage(page): void {
