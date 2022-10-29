@@ -44,8 +44,14 @@ export class HeaderComponent implements OnInit {
   }
 
   async logout(): Promise<void> {
+    this.tenderService.showPaymentPopup.next(false);
+    this.tenderService.showPopup.next(false);
     await this.tenderService.logout()
     this.router.navigate(['/login']);
+  }
+
+  showPaymentPopup(): void {
+    this.tenderService.showPaymentPopup.next(true);
   }
 
 }

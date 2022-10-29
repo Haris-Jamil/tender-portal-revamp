@@ -12,6 +12,7 @@ export class TenderService {
   // candidates for moving into a seperate communication service
   authEvent: BehaviorSubject<any> = new BehaviorSubject(null);
   showPopup: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  showPaymentPopup: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
 

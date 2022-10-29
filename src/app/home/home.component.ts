@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = false;
   trialModal;
   subExpModal;
+  paymentModal;
   trialSuccessSwalVisible = false;
   subscribeSwalVisible = false;
   requestSendSwalVisible = false;
@@ -57,9 +58,24 @@ export class HomeComponent implements OnInit {
     const modalEl = document.querySelector('#trialModal');
     this.trialModal = bootstrap.Modal.getOrCreateInstance(modalEl, {});
 
+    const paymentModalEl = document.querySelector('#paymentModal');
+    this.paymentModal = bootstrap.Modal.getOrCreateInstance(paymentModalEl, {});
+
     this.tenderService.showPopup.subscribe( (show) => {
-      if (show) {
+      if (show && this.trialModal._isShown === false) {
         this.trialModal.show();
+      }
+      if (!show && this.trialModal._isShown) {
+        this.trialModal.hide();
+      }
+    });
+
+    this.tenderService.showPaymentPopup.subscribe( (show) => {
+      if (show && this.paymentModal._isShown === false) {
+        this.paymentModal.show();
+      }
+      if (!show && this.paymentModal._isShown) {
+        this.paymentModal.hide();
       }
     });
 
@@ -130,23 +146,34 @@ export class HomeComponent implements OnInit {
 
   closeModal(): void {
     this.trialModal.hide();
-    document.querySelectorAll('.modal-backdrop').forEach( (el) => {
-        el.remove();
-    });
-    if (document.querySelector('.modal-backdrop')) {
-      document.querySelector('.modal-backdrop').remove();
-    }
+    // document.querySelectorAll('.modal-backdrop').forEach( (el) => {
+    //     el.remove();
+    // });
+    // if (document.querySelector('.modal-backdrop')) {
+    //   document.querySelector('.modal-backdrop').remove();
+    // }
+    
+  }
+
+  closeModalPayment(): void {
+    this.paymentModal.hide();
+    // document.querySelectorAll('.modal-backdrop').forEach( (el) => {
+    //     el.remove();
+    // });
+    // if (document.querySelector('.modal-backdrop')) {
+    //   document.querySelector('.modal-backdrop').remove();
+    // }
     
   }
 
   closeModalSubExp(): void {
     this.subExpModal.hide();
-    document.querySelectorAll('.modal-backdrop').forEach( (el) => {
-        el.remove();
-    });
-    if (document.querySelector('.modal-backdrop')) {
-      document.querySelector('.modal-backdrop').remove();
-    }
+    // document.querySelectorAll('.modal-backdrop').forEach( (el) => {
+    //     el.remove();
+    // });
+    // if (document.querySelector('.modal-backdrop')) {
+    //   document.querySelector('.modal-backdrop').remove();
+    // }
     
   }
 
