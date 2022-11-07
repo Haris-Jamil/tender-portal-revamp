@@ -136,11 +136,11 @@ export class HomeComponent implements OnInit {
         }     
       }
       this.loadTenders(this.page); 
-    }
 
-    if (user.username === 'admin') {
-      this.loadTenders(this.page); 
-    }
+      if (user.username === 'admin') {
+        this.loadTenders(this.page); 
+      }
+    }    
     
   }
 

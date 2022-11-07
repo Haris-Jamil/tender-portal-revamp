@@ -14,6 +14,7 @@ export class DetailComponent implements OnInit {
   tender: any;
   faFile = faFile;
   status: string;
+  hideFiles = false;
   fileBaseUrl = 'http://tii-usa.com/tender-tracker-new/files'
 
   constructor(private route: ActivatedRoute, private tenderService: TenderService) { }
@@ -22,6 +23,12 @@ export class DetailComponent implements OnInit {
       this.route.paramMap.subscribe( (data: any) => {
         this.getTender(data.params.id);
       });      
+
+      this.tenderService.authEvent.subscribe( (user) => {
+        if (user) {
+          this.hideFiles = ((user.type == 1) || (user.type == 2 )) ? true : false; // only show files to subscribed user or admin   
+        }
+      });
   }
 
   async getTender(id): Promise<void> {

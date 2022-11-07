@@ -50,7 +50,7 @@ export class TenderListItemComponent implements OnInit {
 
     this.tenderService.authEvent.subscribe( (user) => {
       if (user) {
-        this.blurMode = ((user.type == 1) || (user.type == 2 && this.page !== 1)) ? true : false; // only active blur mode for non trial/subscribed user
+        // this.blurMode = ((user.type == 1) || (user.type == 2 && this.page !== 1)) ? true : false; // only active blur mode for non trial/subscribed user
         this.isAdmin = user.type == 0 ? true : false;
       }
     });

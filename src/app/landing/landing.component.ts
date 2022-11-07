@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
     document.querySelector('body').style.height = '100%';    
     (document.querySelector('div.footer') as any).style.position = 'inherit';
     this.tenderService.getTenderCounts().then( (resp) => {
-      this.openTenderCount = resp[10].openBids;
+      this.openTenderCount = resp[9].openBids;
     });
   }
 

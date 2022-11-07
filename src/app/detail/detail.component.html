@@ -22,15 +22,19 @@
             </tr>
         </table>          
         <h5 class="fileHeading" >Files:</h5>
+        <ng-container *ngIf="hideFiles">
+            <span style="color:#e74c3c;" >Files not available in trial mode</span>
+        </ng-container>
+        <ng-container *ngIf="!hideFiles">
+            <fa-icon [icon]="faFile"></fa-icon>
+            <a *ngIf="tender.file1" href={{makeFileLink(tender.file1)}} target="_blank" class="fileName" >{{ extractFileName(tender.file1) }}</a>
+            <span *ngIf="!tender.file1"> NA</span>
+            <br>
 
-        <fa-icon [icon]="faFile"></fa-icon>
-        <a *ngIf="tender.file1" href={{makeFileLink(tender.file1)}} target="_blank" class="fileName" >{{ extractFileName(tender.file1) }}</a>
-        <span *ngIf="!tender.file1"> NA</span>
-        <br>
-
-        <fa-icon [icon]="faFile"></fa-icon>
-        <a *ngIf="tender.file2" href="{{makeFileLink(tender.file2)}}" target="_blank" class="fileName">{{ extractFileName(tender.file2) }}</a>
-        <span *ngIf="!tender.file2"> NA</span>
+            <fa-icon [icon]="faFile"></fa-icon>
+            <a *ngIf="tender.file2" href="{{makeFileLink(tender.file2)}}" target="_blank" class="fileName">{{ extractFileName(tender.file2) }}</a>
+            <span *ngIf="!tender.file2"> NA</span>
+        </ng-container>        
     </div>
 
     <div class="rightContainer" >

@@ -1,129 +1,130 @@
-<div class="myContainer" >
-    <div class="sideContainer" >
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="filter-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#filters" type="button" role="tab" aria-controls="filters" aria-selected="true">Filters</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link {{showTabs ? '': 'hidden'}}" id="add-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#addTender" type="button" role="tab" aria-controls="addTender" aria-selected="false">Add Tender</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link disabled {{showTabs ? '': 'hidden'}}" id="edit-tab" data-bs-toggle="tab" data-bs-target="#editTender" type="button" role="tab" aria-controls="editTender" aria-selected="false">Edit Tender</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="filters" role="tabpanel" aria-labelledby="filter-tab">
-                <app-filter (emitFilter)="applyFilter($event)" ></app-filter>
-            </div>
-            <div class="tab-pane fade" id="addTender" role="tabpanel" aria-labelledby="add-tab">
-                <app-add-tender [editTender]="null" (saved)="reload()" ></app-add-tender>
-            </div>
-            <div class="tab-pane fade" id="editTender" role="tabpanel" aria-labelledby="edit-tab">
-                <app-add-tender [editTender]="selectedTender" (saved)="reload()" ></app-add-tender>
-            </div>
-        </div>
-
-        <div *ngIf="trialUser" class="subscribeBox" >
-            <h5>Watching content in trial mode</h5>
-            <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
-        </div>
-
-        <div *ngIf="trialTaken" class="subscribeBox" >
-            <h5>You have utilized your 7 days free trial</h5>
-            <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
-        </div>
-        
-    </div>
-
-    <div class="placeholderContainer" ></div>
-
-    <div class="listingContainer" >
-        <div [ngClass]="loading ? 'hidden' : '' " >
-            <app-applied-filter [filterObj]="filter" ></app-applied-filter>
-            <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
-            <div *ngIf="tenders.length" >
-                <span><b>Page # {{page}}</b></span>                                
-                <span style="float: right;" >
-                    <span class="count" *ngIf="mode == 'c'" >Active Bids ({{openBids}})</span>
-                    <span class="count" *ngIf="mode != 'c'" >Closed Bids ({{closedBids}})</span>
-                    <button (click)="changeMode('c')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-primary' : 'btn-secondary' " >Current</button>
-                    <button (click)="changeMode('a')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-secondary' : 'btn-primary' ">Archive</button>                    
-                </span>
-            </div>
-            <app-tender-list-item *ngFor="let t of tenders" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
-            <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
-            <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >
-                <hr>
-                <h4 class="notFoundMsg" >End of Results</h4>
-            </ng-container>
-        </div>
-        <div [ngClass]="!loading ? 'hidden' : '' ">
-            <div class="spinner spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-        
-    </div>
-
-    <div id="SubExpireModal" class="modal" tabindex="-1" data-bs-backdrop="false">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" (click)="closeModalSubExp()" class="btn-close" ></button>
-            </div>
-            <div class="modal-body" >
-                <h5>Subscription Expiring</h5>
-                <hr id="seprator" >
-                <h3 class="headingLast" >Your subscription is ending on {{getEndDate()}}</h3>
-            </div>
-          </div>
-        </div>
-    </div>
-    
-    <div id="paymentModal" class="modal" tabindex="-1" data-bs-backdrop="false">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" (click)="closeModalPayment()" class="btn-close" ></button>
-            </div>
-            <div class="modal-body" >
-                <h1 style="text-align: center;" >Available Payment Options</h1>
-                <div class="row" >
-                    <div class="col-md-4" >
-                        
-                    </div>
-                    <div class="col-md-4" >
-                        <img src="./assets/images/easypaisa.png" />
-                    </div>
-                    <div class="col-md-4" >
-
-                    </div>
+<div class="container-fluid" >
+    <div class="row" style="padding-top: 20px;padding-bottom:50px" >
+        <div class="col-md-3" >
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="filter-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#filters" type="button" role="tab" aria-controls="filters" aria-selected="true">Filters</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{showTabs ? '': 'hidden'}}" id="add-tab" (click)="openTab()" data-bs-toggle="tab" data-bs-target="#addTender" type="button" role="tab" aria-controls="addTender" aria-selected="false">Add Tender</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled {{showTabs ? '': 'hidden'}}" id="edit-tab" data-bs-toggle="tab" data-bs-target="#editTender" type="button" role="tab" aria-controls="editTender" aria-selected="false">Edit Tender</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="filters" role="tabpanel" aria-labelledby="filter-tab">
+                    <app-filter (emitFilter)="applyFilter($event)" ></app-filter>
+                </div>
+                <div class="tab-pane fade" id="addTender" role="tabpanel" aria-labelledby="add-tab">
+                    <app-add-tender [editTender]="null" (saved)="reload()" ></app-add-tender>
+                </div>
+                <div class="tab-pane fade" id="editTender" role="tabpanel" aria-labelledby="edit-tab">
+                    <app-add-tender [editTender]="selectedTender" (saved)="reload()" ></app-add-tender>
                 </div>
             </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="trialModal" class="modal" tabindex="-1" data-bs-backdrop="false">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" (click)="closeModal()" class="btn-close" ></button>
-            </div>
-            <div class="modal-body" >
-                <h5>content you are viewing is partially locked</h5>
-                <hr id="seprator" >
-                <h3 class="heading" >Please purchase subscription</h3>
-                <h5 class="heading" >OR</h5>
-                <h3 class="headingLast" >Activate your 7 days free trial now!</h3>
-                <button class="btn btn-lg btn-success" style="margin-right:20px" (click)="showSubConfirm()" >Subscribe</button>
-                <button *ngIf="!trialTaken" class="btn btn-lg btn-primary" (click)="activateTrial()" >Activate Trial</button>
-                <button *ngIf="trialTaken" class="btn btn-lg btn-primary disabled" (click)="activateTrial()" >Free Trial Utilized</button>
-            </div>
-            </div>
-        </div>
-    </div>
     
+            <div *ngIf="trialUser" class="subscribeBox" >
+                <h5>Watching content in trial mode</h5>
+                <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
+            </div>
+    
+            <div *ngIf="trialTaken" class="subscribeBox" >
+                <h5>You have utilized your 7 days free trial</h5>
+                <button class="btn btn-md btn-success" (click)="showSubConfirm()" >Subscribe Now</button>
+            </div>
+            
+        </div>
+    
+        <div class="col-md-9" >
+            <div [ngClass]="loading ? 'hidden' : '' " >
+                <app-applied-filter [filterObj]="filter" ></app-applied-filter>
+                <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
+                <div *ngIf="tenders.length" >
+                    <span><b>Page # {{page}}</b></span>                                
+                    <span style="float: right;" >
+                        <span class="count" *ngIf="mode == 'c'" >Active Bids ({{openBids}})</span>
+                        <span class="count" *ngIf="mode != 'c'" >Closed Bids ({{closedBids}})</span>
+                        <button (click)="changeMode('c')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-primary' : 'btn-secondary' " >Current</button>
+                        <button (click)="changeMode('a')" class="btn btn-sm btn-toggle" [ngClass]="mode == 'c' ? 'btn-secondary' : 'btn-primary' ">Archive</button>                    
+                    </span>
+                </div>
+                <app-tender-list-item *ngFor="let t of tenders" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
+                <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
+                <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >
+                    <hr>
+                    <h4 class="notFoundMsg" >End of Results</h4>
+                </ng-container>
+            </div>
+            <div [ngClass]="!loading ? 'hidden' : '' ">
+                <div class="spinner spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            
+        </div>
+                        
+    </div>
+</div>
+
+
+<div id="paymentModal" class="modal" tabindex="-1" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" (click)="closeModalPayment()" class="btn-close" ></button>
+        </div>
+        <div class="modal-body" >
+            <h1 style="text-align: center;" >Available Payment Options</h1>
+            <div class="row" >
+                <div class="col-md-4" >
+                    
+                </div>
+                <div class="col-md-4" >
+                    <img src="./assets/images/easypaisa.png" />
+                </div>
+                <div class="col-md-4" >
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="trialModal" class="modal" tabindex="-1" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" (click)="closeModal()" class="btn-close" ></button>
+        </div>
+        <div class="modal-body" >
+            <h5>content you are viewing is partially locked</h5>
+            <hr id="seprator" >
+            <h3 class="heading" >Please purchase subscription</h3>
+            <h5 class="heading" >OR</h5>
+            <h3 class="headingLast" >Activate your 7 days free trial now!</h3>
+            <button class="btn btn-lg btn-success" style="margin-right:20px" (click)="showSubConfirm()" >Subscribe</button>
+            <button *ngIf="!trialTaken" class="btn btn-lg btn-primary" (click)="activateTrial()" >Activate Trial</button>
+            <button *ngIf="trialTaken" class="btn btn-lg btn-primary disabled" (click)="activateTrial()" >Free Trial Utilized</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="SubExpireModal" class="modal" tabindex="-1" data-bs-backdrop="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" (click)="closeModalSubExp()" class="btn-close" ></button>
+        </div>
+        <div class="modal-body" >
+            <h5>Subscription Expiring</h5>
+            <hr id="seprator" >
+            <h3 class="headingLast" >Your subscription is ending on {{getEndDate()}}</h3>
+        </div>
+      </div>
+    </div>
 </div>
 
 <swal
