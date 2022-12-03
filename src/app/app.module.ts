@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { RouteReuseStrategy, RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,13 +21,14 @@ import { UserManagerComponent } from './user-manager/user-manager.component';
 import { LandingComponent } from './landing/landing.component';
 import { FooterComponent } from './footer/footer.component';
 import { MultiSelectDropdownModule } from './multi-select-dropdown/multi-select-dropdown.module';
+import { RouteReuseService } from './RouteReuseService';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LandingComponent },
   { path: 'login/:message', component: LandingComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, data: { reuse: true } },
   { path: 'detail/:id', component: DetailComponent },
   { path: 'dashboard', component: UserManagerComponent }
 ];
@@ -62,7 +63,10 @@ const appRoutes: Routes = [
     SweetAlert2Module.forRoot(),
     MultiSelectDropdownModule
   ],
-  providers: [],
+  providers: [{
+    provide: RouteReuseStrategy,
+    useClass: RouteReuseService
+  }],
   bootstrap: [AppComponent],  
 })
 export class AppModule { }
