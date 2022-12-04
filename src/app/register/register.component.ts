@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     document.querySelector('html').style.height = '';
     document.querySelector('body').style.height = '';
     (document.querySelector('div.footer') as any).style.position = 'absolute';
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user-hal-tender');
     if (user) {
       this.router.navigate(['/home']);
     }

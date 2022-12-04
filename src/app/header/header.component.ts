@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
         this.isStrayUser = auth.type == 1 ? true : false;
       }
     });
-    let user = localStorage.getItem('user');
+    let user = localStorage.getItem('user-hal-tender');
     if (user) {
       user = JSON.parse(user);
       this.tenderService.authEvent.next(user);

@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
     document.querySelector('html').style.height = '';
     document.querySelector('body').style.height = '';
     this.footer = document.querySelector('div.footer');
-    let user = localStorage.getItem('user');
+    let user = localStorage.getItem('user-hal-tender');
     this.setCounts();
     if (!user) {
       this.router.navigate(['/login']);

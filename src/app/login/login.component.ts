@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private tenderService: TenderService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    const user = localStorage.getItem('user-hal-tender');
     if (user) {
       this.router.navigate(['/home']);
     }

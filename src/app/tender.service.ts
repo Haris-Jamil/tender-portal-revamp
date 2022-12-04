@@ -18,13 +18,13 @@ export class TenderService {
 
   setUser(userData): void {
     this.authEvent.next(userData[0]);    
-    localStorage.setItem('user', JSON.stringify({
+    localStorage.setItem('user-hal-tender', JSON.stringify({
       username: userData[0].username.trim(), 
       type: userData[0].type, 
       userId: userData[0].id,
       trialTaken: userData[0].trialTaken
     }));
-    localStorage.setItem('sessionId', userData[1]);
+    localStorage.setItem('sessionId-hal-tender', userData[1]);
   }
 
   getTenders(page: number, filter, catFilter): Promise<any> {
@@ -80,8 +80,8 @@ export class TenderService {
   logout(): Promise<any> {    
     return this.get(`${this.baseUrl}logout.php?dummy=1`).then( (resp) => {
         if (resp == 1) {          
-            localStorage.removeItem('user');
-            localStorage.removeItem('sessionId');
+            localStorage.removeItem('user-hal-tender');
+            localStorage.removeItem('sessionId-hal-tender');
             this.authEvent.next(null);
         } else {
             alert('some error occured while loging out');
@@ -91,7 +91,7 @@ export class TenderService {
   }
 
   getCurrentUser(): any {
-      let user = localStorage.getItem('user');
+      let user = localStorage.getItem('user-hal-tender');
       if (user) {
           return JSON.parse(user);
       }
@@ -161,12 +161,12 @@ export class TenderService {
   }
 
   get(url): Promise<any> {
-      url += `&sid=${localStorage.getItem('sessionId')}`;
+      url += `&sid=${localStorage.getItem('sessionId-hal-tender')}`;
       return this.http.get(url).toPromise();
   }
 
   post(url, data): Promise<any> {
-    data.append('sid', localStorage.getItem('sessionId'));
+    data.append('sid', localStorage.getItem('sessionId-hal-tender'));
     return this.http.post(url, data).toPromise();
   } 
 
