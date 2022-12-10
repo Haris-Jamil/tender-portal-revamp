@@ -1,7 +1,26 @@
 .pill {
     margin-right: 10px;
-    background-color: #2f3640;
     padding: 5px;
-    border-radius: 5px;
-    color: #f5f6fa;
+    border-radius: 8px;
+    border: 1px solid #40739e;
+    white-space: nowrap;
+    color: white;
+}
+
+.pillTitle {
+    font-size: 13px;
+    color: #353b48;
+}
+
+
+.innerPill {
+    background-color: #00a8ff;
+    padding: 2px 5px;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.cross {
+    color: #2d3436;
+    cursor: pointer;
 }

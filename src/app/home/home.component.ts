@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   title = 'tender-portal-revamp';
   tenders: any[] = [];
   page = 1;
+  limit = 20;
   selectedTender: Tender = null;
   filter = {};
   showTabs: boolean = false;
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(PaginationComponent)
   pagination: PaginationComponent;
   endDate: any[];
+  firstLoad: boolean = false;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -187,7 +189,7 @@ export class HomeComponent implements OnInit {
           this.userCategoryFilter += ','
         }        
       }
-      const response = await this.tenderService.getTenders(page,  this.filter, this.userCategoryFilter);
+      const response = await this.tenderService.getTenders(page,  this.filter, this.userCategoryFilter, this.limit);
       if (response && response.message == 'trial expired') {
         await this.tenderService.logout()
         this.router.navigate(['/login', 'trial period expired, Please login again to continue']);
@@ -197,8 +199,21 @@ export class HomeComponent implements OnInit {
       } else {
         this.tenders = response;
       }
+      if (!this.firstLoad) {
+        this.firstLoad = true;
+      }
       this.loading = false;
       this.footer.style.display = '';
+  }
+
+  setLimit(e): void {
+    this.limit = e.target.value;
+    this.page = 1;
+    if (this.pagination) {
+      this.pagination.reset();
+    } else {
+      this.loadTenders(this.page);
+    }
   }
 
   openTab(): void {

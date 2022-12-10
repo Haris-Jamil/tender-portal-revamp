@@ -39,9 +39,17 @@
         <div class="col-md-9" >
             <div [ngClass]="loading ? 'hidden' : '' " >
                 <app-applied-filter [filterObj]="filter" ></app-applied-filter>
-                <h2 *ngIf="tenders.length == 0" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
+                <h2 *ngIf="tenders.length == 0 && firstLoad" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
                 <div *ngIf="tenders.length" >
-                    <span><b>Page # {{page}}</b></span>                                
+                    <span><b>Page # {{page}}</b></span>      
+                    <select class="limitDropdown" [(ngModel)]="limit" name="limit" (change)="setLimit($event)" >
+                        <option value="20" >20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                        <option value="500">500</option>
+                    </select>
+                    <span>Results per page</span>                       
                     <span style="float: right;" >
                         <span class="count" *ngIf="mode == 'c'" >Active Bids ({{openBids}})</span>
                         <span class="count" *ngIf="mode != 'c'" >Closed Bids ({{closedBids}})</span>
@@ -50,11 +58,12 @@
                     </span>
                 </div>
                 <app-tender-list-item *ngFor="let t of tenders" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
-                <app-pagination *ngIf="tenders.length == 20" (emitPage)="gotoPage($event)" ></app-pagination>        
-                <ng-container *ngIf="tenders.length !== 0 && tenders.length < 20"  >
+                <ng-container *ngIf="tenders.length !== 0 && tenders.length < limit"  >
                     <hr>
                     <h4 class="notFoundMsg" >End of Results</h4>
                 </ng-container>
+                <app-pagination *ngIf="firstLoad" (emitPage)="gotoPage($event)" ></app-pagination>        
+                
             </div>
             <div [ngClass]="!loading ? 'hidden' : '' ">
                 <div class="spinner spinner-border text-primary" role="status">

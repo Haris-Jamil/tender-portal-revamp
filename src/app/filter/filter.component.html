@@ -28,7 +28,7 @@
 </div>
 <div class="filterSection">
     <ng-container *ngFor="let c of categories" >
-        <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="{{c}}" /> {{c}}</label><br/>                           
+        <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="{{c}}" /> {{c}}</label><span class="count">{{getCatCount(c)}}</span><br/>                           
     </ng-container>       
 </div>
 

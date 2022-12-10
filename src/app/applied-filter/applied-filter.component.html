@@ -1,5 +1,12 @@
-<div *ngIf="filters.length">
+<div *ngIf="filters.length" style="line-height: 2.5;">
     <strong style="margin-right:10px" >Applied Filters:</strong>
-    <span class="pill" *ngFor="let filter of filters" >{{filter | titlecase}}</span>
+    <span class="pill" *ngFor="let filter of filters" >
+        <span class="pillTitle" >{{filter.name | titlecase }}:</span>
+        <span class="innerPill"  *ngFor="let f of filter.data" >{{f}} 
+            <span class="cross" (click)="removeFilter()" >
+                <fa-icon [icon]="crossIcon"></fa-icon>
+            </span>
+        </span>
+    </span>
     <hr>
 </div>

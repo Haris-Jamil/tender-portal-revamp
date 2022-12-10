@@ -58,10 +58,16 @@ export class FilterComponent implements OnInit {
   }
 
   getCount(title): string {
-    if (!this.counts.length) { return '0'; }
-    const company: {count, code} = this.counts.filter( x => x.code == title )[0];
+    if (!this.counts[0].length) { return '0'; }
+    const company: {count, code} = this.counts[0].filter( x => x.code == title )[0];
     return `(${company ? company.count : '0'})`
   }
+
+  getCatCount(title): string {
+    if (!this.counts[1].length) { return '0'; }
+    const data: {count, category} = this.counts[1].filter( x => x.category == title )[0];
+    return `(${data.category ? data.count : '0'})`
+  }  
 
   applyFilter(): void {
     const appliedFilters = {};

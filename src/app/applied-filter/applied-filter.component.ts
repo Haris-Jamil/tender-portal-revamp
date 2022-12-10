@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-applied-filter',
@@ -8,7 +9,8 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 export class AppliedFilterComponent implements OnInit, OnChanges {
 
   @Input() filterObj: any;
-  filters: string[] = [];
+  filters: any[] = [];
+  crossIcon = faTimes;
 
   constructor() { }
 
@@ -20,10 +22,24 @@ export class AppliedFilterComponent implements OnInit, OnChanges {
           return key !== 'mode'
         })
         .map( (key) => {
-          return `${key}: ${this.filterObj[key]}`
+          // return `${key}: ${)}`
+          return {
+            name: key,
+            data: this.clean(this.filterObj[key])
+          }
         });
       delete this.filters['mode'];      
     }
+  }
+
+  removeFilter() {
+
+  }
+
+  clean(filterText) {
+    filterText = filterText.replace(/undefined/g, '');
+    filterText = filterText.split(',').filter(str => str.length);
+    return filterText;
   }
 
   ngOnInit(): void {

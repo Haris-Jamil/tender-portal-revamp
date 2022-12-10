@@ -27,7 +27,7 @@ export class TenderService {
     localStorage.setItem('sessionId-hal-tender', userData[1]);
   }
 
-  getTenders(page: number, filter, catFilter): Promise<any> {
+  getTenders(page: number, filter, catFilter, limit): Promise<any> {
     let queryStr = '';
     if (!filter['categories'] && catFilter) {
       filter['categories'] = '';
@@ -40,7 +40,7 @@ export class TenderService {
       }
       queryStr += `&${k}=${filter[k]}`
     }
-    return this.get(`${this.baseUrl}getTenders.php?page=${page}${queryStr}`);
+    return this.get(`${this.baseUrl}getTenders.php?page=${page}&limit=${limit}${queryStr}`);
   }
 
   getUserCategories(): Promise<any> {
