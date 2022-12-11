@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
@@ -9,6 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 export class AppliedFilterComponent implements OnInit, OnChanges {
 
   @Input() filterObj: any;
+  @Output() emitRemoveFilter: EventEmitter<any> = new EventEmitter();
   filters: any[] = [];
   crossIcon = faTimes;
 
@@ -22,21 +23,34 @@ export class AppliedFilterComponent implements OnInit, OnChanges {
           return key !== 'mode'
         })
         .map( (key) => {
-          // return `${key}: ${)}`
           return {
             name: key,
-            data: this.clean(this.filterObj[key])
+            data: this.clean(this.filterObj[key], key)
           }
         });
       delete this.filters['mode'];      
     }
   }
 
-  removeFilter() {
-
+  format(name): string {
+    if (name == "nilBid") {
+      name = "BidSecurity";
+    }
+    return name.match(/[A-Z]?[a-z]+|[0-9]+|[A-Z]+(?![a-z])/g).join(" ");
   }
 
-  clean(filterText) {
+  removeFilter(filterName, filter) {
+    this.emitRemoveFilter.emit({
+      'filterName': filterName,
+      'filter': filter
+    })
+  }
+
+  clean(filterText, key) {
+    if (key == 'nilBid') {
+      filterText = filterText ? 'No Bid Security' : 'With Bid Security';
+      return [filterText];
+    }
     filterText = filterText.replace(/undefined/g, '');
     filterText = filterText.split(',').filter(str => str.length);
     return filterText;

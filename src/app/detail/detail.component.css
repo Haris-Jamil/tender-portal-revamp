@@ -46,3 +46,11 @@ h1 {
 .closed {
     background-color: #e84118;
 }
+
+.restricted {
+    cursor: not-allowed;
+}
+
+.fileHeading {
+    margin-top: 40px;
+}

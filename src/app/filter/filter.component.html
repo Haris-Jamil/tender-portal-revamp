@@ -3,7 +3,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" [(ngModel)]="filterObj.title" />
+    <input id="title" type="text" class="input-control" [(ngModel)]="filterObj.title" />
 </div>               
 
 <div class="filterTitle" (click)="toggleFilterSection($event)" >
@@ -11,7 +11,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" [(ngModel)]="filterObj.tenderNo" />
+    <input id="tenderNo" type="text" class="input-control" [(ngModel)]="filterObj.tenderNo" />
 </div>               
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -19,7 +19,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <input type="text" class="input-control" [(ngModel)]="filterObj.location" />
+    <input id="location" type="text" class="input-control" [(ngModel)]="filterObj.location" />
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -28,27 +28,22 @@
 </div>
 <div class="filterSection">
     <ng-container *ngFor="let c of categories" >
-        <label><input type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="{{c}}" /> {{c}}</label><span class="count">{{getCatCount(c)}}</span><br/>                           
+        <label><input id="{{c}}" type="checkbox" (click)="setCheckbox($event, 'categories')" name="category" value="{{c}}" /> {{c}}</label><span class="count">{{getCatCount(c)}}</span><br/>                           
     </ng-container>       
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
-    <span>Company</span>
+    <span>Agency</span>
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection">
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="OGDCL" /> OGDCL </label><span class="count">{{getCount('OGDCL')}}</span><br/>                           
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PAKRAIL" /> PAKRAIL </label><span class="count">{{getCount('PAKRAIL')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PARCO" /> PARCO </label><span class="count">{{getCount('PARCO')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PAK" /> PPRA-PAK </label><span class="count">{{getCount('PPRA-PAK')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPRA-PUN" /> PPRA-PUN </label><span class="count">{{getCount('PPRA-PUN')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PSO" /> PSO </label><span class="count">{{getCount('PSO')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="POF" /> POF </label><span class="count">{{getCount('POF')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="SNGPL" /> SNGPL </label><span class="count">{{getCount('SNGPL')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PIA" /> PIA </label><span class="count">{{getCount('PIA')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="PPL" /> PPL </label><span class="count">{{getCount('PPL')}}</span><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'companies')" name="company" value="MISCELLANEOUS" /> MISCELLANEOUS </label><span class="count"> {{getCount('MISCELLANEOUS')}}</span>
-    <input style="width:250px" [(ngModel)]="companyText" type="text" class="form-control form-control-sm" placeholder="company.." >
+    <ng-container *ngFor="let comp of allCompanies" >
+        <label>
+            <input type="checkbox" id="{{comp}}" (click)="setCheckbox($event, 'companies')" name="company" value="{{comp}}" /> {{comp}} 
+        </label>
+        <span class="count">{{getCount(comp)}}</span><br/>                           
+    </ng-container>    
+    <input id="companyText" style="width:250px" [(ngModel)]="companyText" type="text" class="form-control form-control-sm" placeholder="company.." >
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -56,9 +51,9 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>   
 <div class="filterSection">
-    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="Local" /> Local</label><br/>                           
-    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="National" /> National</label><br/>
-    <label><input type="checkbox" (click)="setCheckbox($event, 'nature')" value="International" /> International</label>  
+    <label><input id="Local" type="checkbox" (click)="setCheckbox($event, 'nature')" value="Local" /> Local</label><br/>                           
+    <label><input id="National" type="checkbox" (click)="setCheckbox($event, 'nature')" value="National" /> National</label><br/>
+    <label><input id="International" type="checkbox" (click)="setCheckbox($event, 'nature')" value="International" /> International</label>  
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -66,7 +61,8 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>   
 <div class="filterSection">
-    <label><input type="checkbox" (click)="setCheckbox($event, 'nilBid')" /> Nil Bids</label><br/>      
+    <label><input id="NoBidSecurity" type="checkbox" (click)="setCheckbox($event, 'NoBidSecurity')" /> No bid security</label><br/>    
+    <label><input id="WithBidSecurity" type="checkbox" (click)="setCheckbox($event, 'WithBidSecurity')" /> With bid security</label> 
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -75,9 +71,9 @@
 </div>
 <div class="filterSection" style="padding-right:15px" >
     <span>Start Date:</span>
-    <input type="date" class="form-control" name="publishedDate" (change)="changeDate($event, 'publishedDate')" >
+    <input id="publishedDate" type="date" class="form-control" name="publishedDate" (change)="changeDate($event, 'publishedDate')" >
     <span>End Date:</span>
-    <input style="margin-top:5px" [disabled]="!filterObj.publishedDate" type="date" class="form-control" name="publishedDateEnd" (change)="changeDate($event, 'publishedDateEnd')" >
+    <input id="publishedDateEnd" style="margin-top:5px" [disabled]="!filterObj.publishedDate" type="date" class="form-control" name="publishedDateEnd" (change)="changeDate($event, 'publishedDateEnd')" >
 </div> 
 
 
@@ -87,9 +83,9 @@
 </div>
 <div class="filterSection border-bottom" style="padding-right:15px">
     <span>Start Date:</span>
-    <input type="date" class="form-control" name="closingDate" (change)="changeDate($event, 'closingDate')" >
+    <input id="closingDate" type="date" class="form-control" name="closingDate" (change)="changeDate($event, 'closingDate')" >
     <span>End Date:</span>
-    <input style="margin-top:5px" [disabled]="!filterObj.closingDate" type="date" class="form-control" name="closingDateEnd" (change)="changeDate($event, 'closingDateEnd')" >
+    <input id="closingDateEnd" style="margin-top:5px" [disabled]="!filterObj.closingDate" type="date" class="form-control" name="closingDateEnd" (change)="changeDate($event, 'closingDateEnd')" >
 </div>
 
 <div class="filterTitle" (click)="toggleFilterSection($event)">
@@ -97,7 +93,7 @@
     <fa-icon [icon]="faCaretDown"></fa-icon>
 </div>
 <div class="filterSection border-bottom" style="padding-right:15px">
-    <input type="date" class="form-control" name="uploadDate" (change)="changeDate($event, 'uploadDate')" >
+    <input id="uploadDate" type="date" class="form-control" name="uploadDate" (change)="changeDate($event, 'uploadDate')" >
 </div>
 
 <button class="btn btn-primary filterBtn btn-sm" (click)="applyFilter()" >Apply Filter</button>
