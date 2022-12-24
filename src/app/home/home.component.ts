@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   pagination: PaginationComponent;
   endDate: any[];
   firstLoad: boolean = false;
+  modifiedFilters: any;
 
   constructor(private tenderService: TenderService, private router: Router) {    
   }
@@ -236,6 +237,10 @@ export class HomeComponent implements OnInit {
     if (response === 1) {
       this.loadTenders(this.page);
     }
+  }
+
+  removeFilter(filters): void {
+    this.modifiedFilters = filters;
   }
 
   applyFilter(filter): void {

@@ -21,20 +21,45 @@
                 <td>{{tender.documentDeadline && tender.documentDeadline !== 'null' && tender.documentDeadline !== 'undefined' ? tender.documentDeadline : 'NA'}}</td>
             </tr>
         </table>          
-        <h5 class="fileHeading" >Files:</h5>
-        <ng-container *ngIf="hideFiles">
-            <span style="color:#e74c3c;" >Files not available in trial mode</span>
-        </ng-container>
-        <ng-container *ngIf="!hideFiles">
-            <fa-icon [icon]="faFile"></fa-icon>
-            <a *ngIf="tender.file1" href={{makeFileLink(tender.file1)}} target="_blank" class="fileName" >{{ extractFileName(tender.file1) }}</a>
-            <span *ngIf="!tender.file1"> NA</span>
-            <br>
+        
+        <ng-container *ngIf="tender.file1 || tender.file2">
 
-            <fa-icon [icon]="faFile"></fa-icon>
-            <a *ngIf="tender.file2" href="{{makeFileLink(tender.file2)}}" target="_blank" class="fileName">{{ extractFileName(tender.file2) }}</a>
-            <span *ngIf="!tender.file2"> NA</span>
-        </ng-container>        
+            <h5 class="fileHeading" >Tender Documents:</h5>
+
+            <ng-container *ngIf="hideFiles">
+
+                <ng-container *ngIf="tender.file1" >
+                    <fa-icon [icon]="faFile"></fa-icon>
+                    <span class="fileName restricted" >{{ extractFileName(tender.file1) }}</span>
+                    <br/>
+                </ng-container>
+                
+                <ng-container *ngIf="tender.file2" >
+                    <fa-icon [icon]="faFile"></fa-icon>
+                    <span class="fileName restricted">{{ extractFileName(tender.file2) }}</span>  
+                    <br/>
+                </ng-container>
+                
+                <span style="color:#e74c3c;font-weight: bold;line-height: 3;" >Files not available in trial mode</span>
+            </ng-container>
+
+            <ng-container *ngIf="!hideFiles">
+
+                <ng-container *ngIf="tender.file1" >
+                    <fa-icon [icon]="faFile"></fa-icon>
+                    <a *ngIf="tender.file1" href={{makeFileLink(tender.file1)}} target="_blank" class="fileName" >{{ extractFileName(tender.file1) }}</a>
+                    <br>
+                </ng-container>
+                
+                <ng-container *ngIf="tender.file2" >
+                    <fa-icon [icon]="faFile"></fa-icon>
+                    <a *ngIf="tender.file2" href="{{makeFileLink(tender.file2)}}" target="_blank" class="fileName">{{ extractFileName(tender.file2) }}</a>
+                </ng-container>
+                
+            </ng-container>   
+
+        </ng-container>
+             
     </div>
 
     <div class="rightContainer" >
