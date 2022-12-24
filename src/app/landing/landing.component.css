@@ -1,5 +1,5 @@
 .bg {
-    background-image: url("https://www.tii-usa.com/portals/hal-tender/assets/images/cons-bg-2.jpg");
+    background-image: url("https://www.tii-usa.com/portals/hal-tender/assets/images/bg.jpg");
     height: 100%;  
     background-position: center;
     background-repeat: no-repeat;
@@ -11,5 +11,9 @@
 }
 
 h1 {
-    color: #f5f6fa;
+    color: #ecf0f1;
+}
+
+ul {
+    color: #ecf0f1;
 }

@@ -21,7 +21,7 @@
 <div class="filterSection">
     <!-- <input type="text" class="input-control" [(ngModel)]="filterObj.location" /> -->
     <ng-container *ngFor="let city of cities" >
-        <label><input type="checkbox" (click)="setCheckbox($event, 'location')" name="location" value="{{city}}" /> {{city}} </label><br/>
+        <label><input id="{{city}}"  type="checkbox" (click)="setCheckbox($event, 'location')" name="location" value="{{city}}" /> {{city}} </label><br/>
     </ng-container>    
     <input style="width:250px" [(ngModel)]="cityText" type="text" class="form-control form-control-sm" placeholder="enter cities coma seperated.." >
 </div>

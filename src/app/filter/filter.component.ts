@@ -63,10 +63,15 @@ export class FilterComponent implements OnInit, OnChanges{
     const modifiedFilter = changes.modifiedFilters.currentValue;    
     if (!modifiedFilter) return;
 
-    if (['nature', 'companies', 'categories', 'nilBid'].includes(modifiedFilter.filterName) ) {
+    if (['nature', 'companies', 'categories', 'nilBid', 'location'].includes(modifiedFilter.filterName) ) {
 
       if (modifiedFilter.filterName === 'companies' && !this.allCompanies.includes(modifiedFilter.filter)) {
-        this.companyText = '';
+        this.companyText = this.companyText.replace(modifiedFilter.filter + ',', '');
+        this.companyText = this.companyText.replace(modifiedFilter.filter, '');        
+      } 
+      else if (modifiedFilter.filterName === 'location' && !this.cities.includes(modifiedFilter.filter)) {
+        this.cityText = this.cityText.replace(modifiedFilter.filter + ',', '');
+        this.cityText = this.cityText.replace(modifiedFilter.filter, '');        
       } else {
         if (modifiedFilter.filterName === 'nilBid') {
           modifiedFilter.filter = modifiedFilter.filter.replaceAll(" ", "" );
@@ -74,7 +79,7 @@ export class FilterComponent implements OnInit, OnChanges{
         document.getElementById(`${modifiedFilter.filter}`).click(); 
       }      
 
-    } else if (['title', 'tenderNo', 'location'].includes(modifiedFilter.filterName)) {
+    } else if (['title', 'tenderNo'].includes(modifiedFilter.filterName)) {
 
       (document.getElementById(`${modifiedFilter.filterName}`) as HTMLInputElement).value  = '';
       this.filterObj[modifiedFilter.filterName] = '';
