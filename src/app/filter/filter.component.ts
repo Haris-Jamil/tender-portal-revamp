@@ -29,7 +29,10 @@ export class FilterComponent implements OnInit {
   companies: string = '';
   categories: string[] = CATEGORIES;
   companyText: string = '';
+  cityText: string = '';
   counts = [];
+  cities = ['Karachi', 'Lahore', 'Faisalabad', 'Rawalpindi', 'Gujranwala', 'Peshawar'
+            , 'Multan	', 'Hyderabad', 'Islamabad', 'Quetta'];
   @Output() emitFilter: EventEmitter<any> = new EventEmitter();
 
   filterObj: Filter = {
@@ -79,6 +82,10 @@ export class FilterComponent implements OnInit {
     if (this.companyText) {
       appliedFilters['companies'] = appliedFilters['companies'] ? appliedFilters['companies'] : ''
       appliedFilters['companies'] += `${this.companyText},`
+    }
+    if (this.cityText) {
+      appliedFilters['location'] = appliedFilters['location'] ? appliedFilters['location'] : ''
+      appliedFilters['location'] += `${this.cityText},`
     }
     this.emitFilter.next(appliedFilters);
   }
