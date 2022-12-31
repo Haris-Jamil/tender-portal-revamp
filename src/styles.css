@@ -23,3 +23,7 @@ body {
     pointer-events: none;
   }
   
+  .svgMap-map-wrapper {
+    border-radius: 23px !important;
+    border: 4px solid #1e3799;
+}

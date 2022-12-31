@@ -4,6 +4,8 @@ export const COMPANIES: string[] = [
     'PARCO',
     'PPRA-PAK',
     'PPRA-PUN',
+    'PPRA-SINDH',
+    'PPRA-KPK',
     'PSO',
     'POF',
     'SNGPL',

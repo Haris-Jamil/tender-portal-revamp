@@ -1,20 +1,31 @@
 <div class="bg" >
     <div class="container-fluid" >
+
         <div class="row" >
-            <div class="col-md-6" >
-                <h1 style="margin-top: 150px;font-size: 50px;" ><strong>Providing latest tenders info</strong></h1>
-                <ul style="font-size:30px;" >
-                    <li><strong>Advance search options</strong></li>
-                    <li><strong>Fast data updates</strong></li>
-                    <li><strong>Easy to use</strong></li>
-                </ul>               
+            <div  class="col-md-2"></div>
+            <div class="col-md-8" style="text-align: center;" >
+                <h1 style="margin-top: 60px;font-size: 50px;" ><strong>Providing latest tenders info</strong></h1>
+                <p style="font-size: 20px;" ><span class="benefits" >Advance search options</span> | <span class="benefits">Fast data updates</span> | <span class="benefits">Easy to use</span></p>                           
             </div>
+        </div>     
+
+
+        <div class="row" >
+            <div class="col-md-3" ></div>
             <div class="col-md-6" >
                 <app-login></app-login>
-            </div>
-        </div>        
+            </div>           
+        </div>   
+       
     </div>    
-    <div class="row" style="text-align: center;background-color: rgb(47, 54, 64, 0.5);color: #ecf0f1;padding: 20px;" >
+    <div class="row" style="width: 100%;height: 700px; margin-top: 80px;" >
+        <div class="col-md-2" ></div>
+        <div class="col-md-8" style="text-align: center;" >
+            <h1 style="font-size: 50px;">Countries we cover</h1>
+            <div id="svgMap"></div>
+        </div>
+    </div>
+    <div class="row" style="height: 300px; text-align: center;background-color: rgb(47, 54, 64, 0.5);color: #ecf0f1;padding: 20px;" >
         <div class="col-md-4"  >
             <h2><span style="font-weight:bolder;font-size:80px;" >{{openTenderCount}}</span> <br>Open bids</h2>
         </div>

@@ -8,12 +8,17 @@
 
 .loginHeader {
     text-align: center;
-    color: #f5f6fa;
+    color: #353b48;
 }
 
 .formContainer {
     padding: 20px;
     border-radius: 20px;
+    background-color: #f5f6fa;
+    text-align: center;
+    box-shadow: 13px 17px 19px -10px rgba(0,0,0,0.75);
+-webkit-box-shadow: 13px 17px 19px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: 13px 17px 19px -10px rgba(0,0,0,0.75);
 }
 
 input {
@@ -39,10 +44,11 @@ input, .loginBtn {
 }
 
 .registerLink {
-    color: #f5f6fa;
+    color: #353b48;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .registerLink a{
-    color: #f5f6fa;
+    color: #7f8fa6;
 }
