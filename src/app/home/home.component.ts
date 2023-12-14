@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
     document.querySelector('html').style.height = '';
     document.querySelector('body').style.height = '';
     this.footer = document.querySelector('div.footer');
+    this.footer.style.position = 'absolute';
     let user = localStorage.getItem('user-hal-tender');
     this.setCounts();
     if (!user) {
