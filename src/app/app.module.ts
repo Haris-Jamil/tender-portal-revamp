@@ -58,7 +58,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(
       appRoutes,
-      {onSameUrlNavigation: 'reload'}
+      {onSameUrlNavigation: 'reload', useHash: true}
     ),
     SweetAlert2Module.forRoot(),
     MultiSelectDropdownModule
