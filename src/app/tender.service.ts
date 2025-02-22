@@ -160,6 +160,18 @@ export class TenderService {
     return this.get(`${this.baseUrl}getCompanies.php?dummy=1`);
   }
 
+  setVisit(userId, tenderId): Promise<any> {
+    const formData = new FormData();
+    formData.append('userId', userId);
+    formData.append('tenderId', tenderId)
+    return this.post(`${this.baseUrl}setVisit.php`, formData);
+  }
+
+  getVisits() {
+    const userId = this.getCurrentUser().userId;
+    return this.get(`${this.baseUrl}getVisits.php?userId=${userId}`);
+  }
+
   get(url): Promise<any> {
       url += `&sid=${localStorage.getItem('sessionId-hal-tender')}`;
       return this.http.get(url).toPromise();

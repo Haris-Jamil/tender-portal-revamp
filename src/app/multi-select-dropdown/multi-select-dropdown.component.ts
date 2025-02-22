@@ -37,9 +37,7 @@ export class MultiSelectDropdownComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
       if (!changes.selectedOptions.isFirstChange()) {
         this.options = this.options.map( (option) => { 
-          if (this.selectedOptions.includes(option.key)) {
-            option.checked = true;
-          }
+          option.checked = changes.selectedOptions.currentValue.includes(option.key);
           return option;
          });
       }

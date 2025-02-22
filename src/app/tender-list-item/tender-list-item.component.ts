@@ -11,11 +11,14 @@ export class TenderListItemComponent implements OnInit {
 
   @Input() tender: any;
   @Input() page: number;
+  @Input() user: any;
+  @Input() visits: string[];
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<string> = new EventEmitter();
   status: string;
   blurMode: boolean = false
   isAdmin: boolean = false;
+  userId: number;
 
   constructor(private router: Router, private tenderService: TenderService) { }
 
@@ -48,22 +51,39 @@ export class TenderListItemComponent implements OnInit {
       }
     }    
 
-    this.tenderService.authEvent.subscribe( (user) => {
-      if (user) {
-        // this.blurMode = ((user.type == 1) || (user.type == 2 && this.page !== 1)) ? true : false; // only active blur mode for non trial/subscribed user
-        this.isAdmin = user.type == 0 ? true : false;
-      }
-    });
+    // this.tenderService.authEvent.subscribe( (user) => {
+    //   if (user) {
+    //     // this.blurMode = ((user.type == 1) || (user.type == 2 && this.page !== 1)) ? true : false; // only active blur mode for non trial/subscribed user
+    //     this.isAdmin = user.type == 0 ? true : false;
+    //   }
+    // });
+
+    this.isAdmin = this.user?.type === "0" ? true : false;
+    this.userId = this.user?.userId;
+  }
+
+  isVisited(tenderId) {
+    return this.visits?.includes(tenderId);
   }
 
   emitEditEvent(): void {
     this.edit.emit(this.tender);
   }
 
-  gotoDetail() {
-    this.router.navigate([`/detail/${this.tender.id}`]);
-    //window.open(`/detail/${this.tender.id}`, "_blank");
+  gotoDetail() {    
+    this.openInNewTab(this.router, `detail/${this.tender.id}`);
+    this.tenderService.setVisit(this.userId, this.tender.id).then((response) => {
+      this.visits.push(this.tender.id);
+      console.log(response);
+    })
   }
+
+  openInNewTab(router: Router, namedRoute) {
+    let newRelativeUrl = router.createUrlTree([namedRoute]);
+    let baseUrl = window.location.href.replace(router.url, '');
+
+    window.open(baseUrl + newRelativeUrl, '_blank');
+}
 
   emitdeleteEvent(): void {
     if (confirm('do you want to delete this article?')) {

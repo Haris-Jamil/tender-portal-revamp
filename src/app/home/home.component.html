@@ -61,7 +61,7 @@
                 </div>
                 
                 <h2 *ngIf="tenders.length == 0 && firstLoad" class="notFoundMsg" style="text-align: center;" >No Tenders found</h2>
-                <app-tender-list-item *ngFor="let t of tenders" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
+                <app-tender-list-item *ngFor="let t of tenders" [visits]="visits" [user]="currentUser" [page]="page" [tender]=t (delete)="deleteTender($event)" (edit)="selectForEdit($event)" ></app-tender-list-item>                
                 <ng-container *ngIf="tenders.length !== 0 && tenders.length < limit"  >
                     <hr>
                     <h4 class="notFoundMsg" >End of Results</h4>

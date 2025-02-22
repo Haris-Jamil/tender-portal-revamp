@@ -6,7 +6,9 @@ import {
     Routes,
     UrlSegment
 } from "@angular/router";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class RouteReuseService implements RouteReuseStrategy {
 
     private handlers: { [key: string]: DetachedRouteHandle } = {};

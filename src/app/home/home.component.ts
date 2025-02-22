@@ -1,4 +1,4 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tender } from '../models/Tender';
 import { TenderService } from '../tender.service';
@@ -42,8 +42,10 @@ export class HomeComponent implements OnInit {
   endDate: any[];
   firstLoad: boolean = false;
   modifiedFilters: any;
+  currentUser: any;
+  visits: string[] = [];
 
-  constructor(private tenderService: TenderService, private router: Router) {    
+  constructor(private tenderService: TenderService, private router: Router, private ref: ChangeDetectorRef) {    
   }
 
   ngOnInit(): void {
@@ -81,7 +83,7 @@ export class HomeComponent implements OnInit {
       if (!show && this.paymentModal._isShown) {
         this.paymentModal.hide();
       }
-    });
+    });    
 
     const modal = document.querySelector('#SubExpireModal');
     this.subExpModal = bootstrap.Modal.getOrCreateInstance(modal, {});
@@ -108,6 +110,7 @@ export class HomeComponent implements OnInit {
 
   async handleUser(user): Promise<void> {
     if (user) {
+      this.currentUser = user;
       this.showTabs = user.type == 0 ? true : false; // only show tabs to admin user
       if (user.type == 1) {
           if ( user.trialTaken == 1) {
@@ -144,8 +147,16 @@ export class HomeComponent implements OnInit {
       if (user.username === 'admin') {
         this.loadTenders(this.page); 
       }
-    }    
-    
+
+      this.loadVisits();
+    }        
+  }
+
+  loadVisits() {
+    this.tenderService.getVisits().then( (response) => {
+      this.visits = response.map(v => v.tender_id);
+      this.ref.detectChanges();
+    })
   }
 
   closeModal(): void {

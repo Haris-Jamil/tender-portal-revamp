@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Tender } from '../models/Tender';
 import { COMPANIES, CATEGORIES } from '../models/models';
 import { TenderService } from '../tender.service';
@@ -28,7 +28,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
   categories: string[] = CATEGORIES; 
 
 
-  constructor(private tenderService: TenderService) { }
+  constructor(private tenderService: TenderService, private ref: ChangeDetectorRef) { }
 
 
   ngOnChanges(changes: SimpleChanges): void {   
@@ -105,6 +105,7 @@ export class AddTenderComponent implements OnInit, OnChanges {
         this.codeManual = '';
         this.btnText = 'saved';
         this.btnState = 'btn-success disabled'
+        this.ref.detectChanges();
         this.saved.emit(true);
       } else {
         this.btnText = 'some error occured';
