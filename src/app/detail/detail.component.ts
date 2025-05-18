@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
   faFile = faFile;
   status: string;
   hideFiles = false;
-  fileBaseUrl = 'http://tii-usa.com/tender-tracker-new/files'
+  fileBaseUrl = 'https://tii-usa.com/tender-tracker-new/files'
 
   constructor(private route: ActivatedRoute, private tenderService: TenderService) { }
 
